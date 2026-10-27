@@ -1,0 +1,341 @@
+{
+  "schema_version": "browser-e2e.v1",
+  "started_at": "2026-10-27T17:54:38.020Z",
+  "base_url": "http://127.0.0.1:8084",
+  "space_id": 23,
+  "scope": "Real browser controls against a separate SQLite-backed LOCAL_MOCK server. Assertions inspect DOM and read-only API state. Model quality and production Temporal/Qdrant are outside this test.",
+  "cases": [
+    {
+      "id": "B01",
+      "name": "初始页面与 Mock 边界",
+      "steps": [
+        "打开根页面",
+        "等待已连接",
+        "检查公开画像与声明"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "title": "幻境 HuanJing · 分身互动实验室",
+        "notice": "演示边界 模型、审核与向量语义均为确定性 Mock；附件会实际上传，但语义证据由填写的模拟描述提供。当前运行使用 SQLite 持久任务；生产方案采用 Temporal / PostgreSQL / Qdrant。",
+        "avatars": 5,
+        "privateCanaryVisible": false
+      },
+      "duration_ms": 3
+    },
+    {
+      "id": "B02",
+      "name": "点赞并评论",
+      "steps": [
+        "填写帖子与候选上限1",
+        "点击发布",
+        "等待终态并检查动作集合"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "post_id": "p_3eade4c49762d0ae594acc8c",
+        "job_id": "j_a691014f997bec02c0ecf457",
+        "status": "COMPLETED",
+        "actions": [
+          "COMMENT",
+          "LIKE"
+        ],
+        "candidate_count": 1,
+        "unique_actions": true
+      },
+      "duration_ms": 1379
+    },
+    {
+      "id": "B03",
+      "name": "仅点赞",
+      "steps": [
+        "填写帖子与候选上限1",
+        "点击发布",
+        "等待终态并检查动作集合"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "post_id": "p_b05f932e7fffad0aecaf85d0",
+        "job_id": "j_9b6738e4d2fdc35610e67c78",
+        "status": "COMPLETED",
+        "actions": [
+          "LIKE"
+        ],
+        "candidate_count": 1,
+        "unique_actions": true
+      },
+      "duration_ms": 1476
+    },
+    {
+      "id": "B04",
+      "name": "仅评论",
+      "steps": [
+        "填写帖子与候选上限1",
+        "点击发布",
+        "等待终态并检查动作集合"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "post_id": "p_5123dd75429a27e5cf542b41",
+        "job_id": "j_448bb115e4c1da86f7ecd149",
+        "status": "COMPLETED",
+        "actions": [
+          "COMMENT"
+        ],
+        "candidate_count": 1,
+        "unique_actions": true
+      },
+      "duration_ms": 2983
+    },
+    {
+      "id": "B05",
+      "name": "忽略",
+      "steps": [
+        "填写帖子与候选上限1",
+        "点击发布",
+        "等待终态并检查动作集合"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "post_id": "p_1953f3fe19f7188e9fc7616b",
+        "job_id": "j_b58d6458cbf31c760d88f9bc",
+        "status": "COMPLETED",
+        "actions": [],
+        "candidate_count": 1,
+        "unique_actions": true
+      },
+      "duration_ms": 1570
+    },
+    {
+      "id": "B06",
+      "name": "PNG 上传与解码",
+      "steps": [
+        "通过文件输入选择真实fixture",
+        "填写明确Mock描述并发布",
+        "打开附件检查浏览器解码"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "post_id": "p_ac914d8c945d05099cf841fb",
+        "job_id": "j_1cf5c049593b383b28eb0f34",
+        "status": "COMPLETED",
+        "actions": [
+          "LIKE",
+          "COMMENT"
+        ],
+        "candidate_count": 1,
+        "unique_actions": true,
+        "mime": "image/png",
+        "browser_decoded": {
+          "width": 640,
+          "duration": null
+        }
+      },
+      "duration_ms": 3023
+    },
+    {
+      "id": "B07",
+      "name": "WAV 上传与解码",
+      "steps": [
+        "通过文件输入选择真实fixture",
+        "填写明确Mock描述并发布",
+        "打开附件检查浏览器解码"
+      ],
+      "status": "PASS",
+      "assertions": {
+        "post_id": "p_cb449b5c197663c163a1a28c",
+        "job_id": "j_fa6174a2c5e7791bf17e7fa5",
+        "status": "COMPLETED",
+        "actions": [
+          "LIKE",
+          "COMMENT"
+        ],
+        "candidate_count": 1,
+        "unique_actions": true,
+        "mime": "audio/wave",
+        "browser_decoded": {
+          "width": null,
+          "duration": 2
+        }
+      },
+      "duration_ms": 2200
+    },
+    {
+      "id": "B08",
+      "name": "MP4 上传与解码",
+      "steps": [
+        "通过文件输入选择真实fixture",
+        "填写明确Mock描述并发布",
+        "打开附件检查浏览器解码"
+      ],
+      "status": "FAIL",
+      "error": "Error: page.waitForFunction timed out after 10000ms on page p1; last URL was \"http://127.0.0.1:8084/\"; last title was \"幻境 HuanJing · 分身互动实验室\".\n    at waitForFunctionTimeoutError (file:////[eval1]:19235:12)\n    at file:////[eval1]:18564:19\n    at async file:////[eval1]:16691:28",
+      "duration_ms": 11041
+    },
+    {
+      "id": "B09",
+      "name": "瞬时依赖失败自动恢复",
+      "steps": [
+        "选择retry_once",
+        "发布并等待完成",
+        "检查失败调用和成功替代调用"
+      ],
+      "status": "FAIL",
+      "error": "Error: Retry evidence absent\n    at assert (file:////[eval2]:16:58)\n    at file:////[eval2]:110:67\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:108:1",
+      "duration_ms": 15946
+    },
+    {
+      "id": "B10",
+      "name": "持续失败与受控重试",
+      "steps": [
+        "选择always_fail",
+        "等待失败",
+        "点击受控重试",
+        "依赖仍故障时再次明确失败"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #loadRefs (file:////[eval1]:19074:24)\n    at async #invalidateRefs (file:////[eval1]:19083:9)\n    at async file:////[eval1]:18562:17\n    at async file:////[eval1]:16691:28",
+      "duration_ms": 28557
+    },
+    {
+      "id": "B11",
+      "name": "UNKNOWN 回执对账",
+      "steps": [
+        "选择unknown_once",
+        "等待对账状态",
+        "点击查询模拟回执并对账",
+        "检查只产生一个评论"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async publish (file:////[eval2]:44:11)\n    at async file:////[eval2]:119:16\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:118:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B12",
+      "name": "评论拒绝不丢失已计划点赞",
+      "steps": [
+        "选择comment_reject",
+        "等待部分完成",
+        "核验点赞保留且评论无发布"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async publish (file:////[eval2]:44:11)\n    at async file:////[eval2]:124:16\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:123:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B13",
+      "name": "删除已完成帖子",
+      "steps": [
+        "发布并等待完成",
+        "点击删除并确认",
+        "确认读取410且列表无可见互动"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async publish (file:////[eval2]:44:11)\n    at async file:////[eval2]:128:16\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:127:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B14",
+      "name": "停用分身后不得召回发布",
+      "steps": [
+        "停用山野旅行家",
+        "发布相关帖子",
+        "确认候选与互动排除travel",
+        "重新启用"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #runAction (file:////[eval1]:18826:22)\n    at async file:////[eval2]:135:2\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:134:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B15",
+      "name": "页面刷新恢复在途任务",
+      "steps": [
+        "选择slow发布",
+        "刷新页面",
+        "从帖子列表重新选中同一任务",
+        "等待原任务完成"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async publish (file:////[eval2]:44:11)\n    at async file:////[eval2]:141:16\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:140:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B16",
+      "name": "响应丢失后刷新与幂等确认",
+      "steps": [
+        "在浏览器fetch层丢弃已提交POST的响应",
+        "核验sessionStorage保留键和body",
+        "刷新后点击重试确认",
+        "确认同一帖子和任务"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async file:////[eval2]:145:2\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:144:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B17",
+      "name": "快速重复点击只提交一次",
+      "steps": [
+        "填写纯文本帖子",
+        "对按钮连续触发两次原生click",
+        "核验仅一次创建请求"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async file:////[eval2]:156:5\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:155:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B18",
+      "name": "帖子 HTML 安全转义",
+      "steps": [
+        "提交含img/onerror的文本",
+        "等待渲染",
+        "核验作为文本展示且未执行"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async publish (file:////[eval2]:44:11)\n    at async file:////[eval2]:163:103\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:162:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B19",
+      "name": "媒体缺少Mock证据时停止放行",
+      "steps": [
+        "上传PNG但留空模拟描述",
+        "发布",
+        "等待审核拒绝且无互动"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #runAction (file:////[eval1]:18826:22)\n    at async publish (file:////[eval2]:43:11)\n    at async file:////[eval2]:168:16\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:167:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B20",
+      "name": "浏览器运行错误检查",
+      "steps": [
+        "完成所有交互后检查error与unhandledrejection记录"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async file:////[eval2]:171:15\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:170:1",
+      "duration_ms": 0
+    },
+    {
+      "id": "B22",
+      "name": "纯马拉松只召回运动分身",
+      "steps": [
+        "候选上限设置4",
+        "发布纯跑步马拉松帖子",
+        "检查所有候选与互动仅fitness"
+      ],
+      "status": "FAIL",
+      "error": "Error: page label not found: p1\n    at PageLedgerStore.getPage (file:////[eval1]:16996:15)\n    at async #resolve (file:////[eval1]:18796:23)\n    at async #evaluate (file:////[eval1]:18804:22)\n    at async publish (file:////[eval2]:44:11)\n    at async file:////[eval2]:174:16\n    at async test (file:////[eval2]:19:54)\n    at async file:////[eval2]:173:1",
+      "duration_ms": 0
+    }
+  ],
+  "screenshots": [],
+  "visual_review": {
+    "status": "PENDING",
+    "note": "Screenshots require separate human/model visual inspection; automatic assertions do not establish visual quality."
+  },
+  "valid_for_product_verdict": false,
+  "interruption_reason": "Superseded scripts continued after ego CLI SIGINT and interfered in the same TaskSpace; this run is excluded from product verdict."
+}

@@ -7,7 +7,7 @@
 <main>
 <section class="rail"><div class="panel"><div class="eyebrow">01 / 发起一次互动</div><h1>发布想法，遇见分身</h1><p class="muted">先审核与理解，再召回候选，由分身决定互动。</p>
 <form id="compose"><label for="post-text">帖子内容</label><textarea id="post-text" rows="5" required>第一次参加半程马拉松跑步，最后五公里很吃力，想请教如何科学安排配速和恢复。</textarea>
-<label for="files">附件 · 图片 / 音频 / 视频</label><input id="files" type="file" accept="image/*,audio/*,video/*" multiple><div id="file-preview"></div>
+<label for="files">附件 · 图片 / 音频 / 视频</label><input id="files" type="file" accept="image/*,audio/*,video/*" multiple><button id="clear-files" type="button" hidden>移除全部附件</button><div id="file-preview"></div>
 <label for="caption">模拟媒体描述 <span class="muted">（不是实际识别结果）</span></label><input id="caption" placeholder="例如：运动截图展示半马配速；此描述作为 Mock 证据">
 <div class="form-row"><div><label for="candidate-count">候选上限</label><input id="candidate-count" type="number" min="1" max="5" value="4"></div><div><label for="fault">故障场景</label><select id="fault"><option value="">正常链路</option><option value="retry_once">依赖失败一次后恢复</option><option value="always_fail">持续依赖失败</option><option value="unknown_once">外部结果未知 · 对账</option><option value="comment_reject">评论审核拒绝</option><option value="slow">慢调用 / 重启恢复</option></select></div></div>
 <button class="primary" id="publish" type="submit">发布并观察链路 →</button><button id="retry-submit" type="button" hidden>重试确认上次提交（相同幂等键）</button><div id="form-message" role="status"></div></form>
