@@ -1,0 +1,368 @@
+{
+  "suite": "real-ai-adapter-local-protocol-fixture",
+  "started_at_utc": "2026-10-27T18:22:39.822052+00:00",
+  "finished_at_utc": "2026-10-27T18:23:13.052990+00:00",
+  "scope": "HTTP-only black-box; isolated SQLite state and random localhost port per case; deterministic MOCK providers",
+  "binary_sha256": "28df5c3a0877ab7f5ba07c9220d6a1e0196538ef57513a55c24b29b5463c5a53",
+  "cases_total": 29,
+  "passed": 8,
+  "failed": 21,
+  "elapsed_seconds": 33.2257,
+  "cases": [
+    {
+      "name": "default_mode_requires_configuration",
+      "expected": "startup fails with blank AI configuration; no implicit fixture mode",
+      "status": "PASS",
+      "actual": {
+        "startup": "rejected",
+        "configuration": "explicitly blank test values",
+        "silent_fixture_fallback": false
+      },
+      "failure": null,
+      "elapsed_seconds": 3.1867
+    },
+    {
+      "name": "two_real_adapter_stages_and_usage",
+      "expected": "two HTTP calls, usage retained, fixture non-keyword candidate",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "([], 'server log tail: 2026/10/28 02:22:43 REAL_SEMANTICS listening on 127.0.0.1:63240; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 179, in case_success\n    check(len(ops) == 2 and all(o['status'] == 'SUCCEEDED' for o in ops), ops)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ([], 'server log tail: 2026/10/28 02:22:43 REAL_SEMANTICS listening on 127.0.0.1:63240; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6886
+    },
+    {
+      "name": "invalid_malformed_understand",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 2, 'candidates': [], 'created_at': 1793125363835, 'deadline': 1793125483835, 'epoch': 2, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_13d107c78dd46b908723e56c', 'max_candidates': 5, 'next_run': 1793125364589, 'operations': [], 'post_id': 'p_d09536dcbff20126a0d65c2c', 'stage': 'UNDERSTAND', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125363989}, 'server log tail: 2026/10/28 02:22:43 REAL_SEMANTICS listening on 127.0.0.1:63262; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 2, 'candidates': [], 'created_at': 1793125363835, 'deadline': 1793125483835, 'epoch': 2, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_13d107c78dd46b908723e56c', 'max_candidates': 5, 'next_run': 1793125364589, 'operations': [], 'post_id': 'p_d09536dcbff20126a0d65c2c', 'stage': 'UNDERSTAND', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125363989}, 'server log tail: 2026/10/28 02:22:43 REAL_SEMANTICS listening on 127.0.0.1:63262; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.7892
+    },
+    {
+      "name": "invalid_missing_understand",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 2, 'candidates': [], 'created_at': 1793125364830, 'deadline': 1793125484830, 'epoch': 2, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_8cef1994e70c8685f81f9cc1', 'max_candidates': 5, 'next_run': 1793125365574, 'operations': [], 'post_id': 'p_ddb940287d69129b3421774d', 'stage': 'UNDERSTAND', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125364974}, 'server log tail: 2026/10/28 02:22:44 REAL_SEMANTICS listening on 127.0.0.1:63278; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 2, 'candidates': [], 'created_at': 1793125364830, 'deadline': 1793125484830, 'epoch': 2, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_8cef1994e70c8685f81f9cc1', 'max_candidates': 5, 'next_run': 1793125365574, 'operations': [], 'post_id': 'p_ddb940287d69129b3421774d', 'stage': 'UNDERSTAND', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125364974}, 'server log tail: 2026/10/28 02:22:44 REAL_SEMANTICS listening on 127.0.0.1:63278; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.9839
+    },
+    {
+      "name": "invalid_missing_profile",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125365625, 'deadline': 1793125485625, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_2573dd1f9b68399679dc130d', 'max_candidates': 5, 'next_run': 1793125366385, 'operations': [], 'post_id': 'p_3b795fc05c9505e6b90a0d68', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125365785}, 'server log tail: 2026/10/28 02:22:45 REAL_SEMANTICS listening on 127.0.0.1:63299; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125365625, 'deadline': 1793125485625, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_2573dd1f9b68399679dc130d', 'max_candidates': 5, 'next_run': 1793125366385, 'operations': [], 'post_id': 'p_3b795fc05c9505e6b90a0d68', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125365785}, 'server log tail: 2026/10/28 02:22:45 REAL_SEMANTICS listening on 127.0.0.1:63299; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.7359
+    },
+    {
+      "name": "invalid_duplicate_profile",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125366253, 'deadline': 1793125486253, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_5d670ad9af58a729a1d77dbc', 'max_candidates': 5, 'next_run': 1793125367084, 'operations': [], 'post_id': 'p_3b7270b001e688d99a43b7e0', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125366484}, 'server log tail: 2026/10/28 02:22:46 REAL_SEMANTICS listening on 127.0.0.1:63315; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125366253, 'deadline': 1793125486253, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_5d670ad9af58a729a1d77dbc', 'max_candidates': 5, 'next_run': 1793125367084, 'operations': [], 'post_id': 'p_3b7270b001e688d99a43b7e0', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125366484}, 'server log tail: 2026/10/28 02:22:46 REAL_SEMANTICS listening on 127.0.0.1:63315; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6933
+    },
+    {
+      "name": "invalid_unknown_profile",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125366948, 'deadline': 1793125486948, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_f62035a9694796b0d259b84e', 'max_candidates': 5, 'next_run': 1793125367783, 'operations': [], 'post_id': 'p_9a8e1dac89db22b2845a9633', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125367183}, 'server log tail: 2026/10/28 02:22:46 REAL_SEMANTICS listening on 127.0.0.1:63331; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125366948, 'deadline': 1793125486948, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_f62035a9694796b0d259b84e', 'max_candidates': 5, 'next_run': 1793125367783, 'operations': [], 'post_id': 'p_9a8e1dac89db22b2845a9633', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125367183}, 'server log tail: 2026/10/28 02:22:46 REAL_SEMANTICS listening on 127.0.0.1:63331; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.7016
+    },
+    {
+      "name": "invalid_out_of_range",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125367650, 'deadline': 1793125487650, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_179fefb46f60ea713467f6de', 'max_candidates': 5, 'next_run': 1793125368484, 'operations': [], 'post_id': 'p_f10af8610b20c2a4c50d2138', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125367884}, 'server log tail: 2026/10/28 02:22:47 REAL_SEMANTICS listening on 127.0.0.1:63346; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125367650, 'deadline': 1793125487650, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_179fefb46f60ea713467f6de', 'max_candidates': 5, 'next_run': 1793125368484, 'operations': [], 'post_id': 'p_f10af8610b20c2a4c50d2138', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125367884}, 'server log tail: 2026/10/28 02:22:47 REAL_SEMANTICS listening on 127.0.0.1:63346; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6985
+    },
+    {
+      "name": "invalid_null_score",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125368344, 'deadline': 1793125488344, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_a289235f57c16fba76ad333b', 'max_candidates': 5, 'next_run': 1793125369173, 'operations': [], 'post_id': 'p_81870a500cd0b29a3815c6e5', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125368573}, 'server log tail: 2026/10/28 02:22:48 REAL_SEMANTICS listening on 127.0.0.1:63361; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125368344, 'deadline': 1793125488344, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_a289235f57c16fba76ad333b', 'max_candidates': 5, 'next_run': 1793125369173, 'operations': [], 'post_id': 'p_81870a500cd0b29a3815c6e5', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125368573}, 'server log tail: 2026/10/28 02:22:48 REAL_SEMANTICS listening on 127.0.0.1:63361; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6906
+    },
+    {
+      "name": "invalid_missing_relevant",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125369035, 'deadline': 1793125489035, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_21ae299203ec23606de1c854', 'max_candidates': 5, 'next_run': 1793125369863, 'operations': [], 'post_id': 'p_036fa280bc051ee580a52d1c', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125369263}, 'server log tail: 2026/10/28 02:22:49 REAL_SEMANTICS listening on 127.0.0.1:63377; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125369035, 'deadline': 1793125489035, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_21ae299203ec23606de1c854', 'max_candidates': 5, 'next_run': 1793125369863, 'operations': [], 'post_id': 'p_036fa280bc051ee580a52d1c', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125369263}, 'server log tail: 2026/10/28 02:22:49 REAL_SEMANTICS listening on 127.0.0.1:63377; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6942
+    },
+    {
+      "name": "invalid_forged_evidence",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125369728, 'deadline': 1793125489728, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_80f4025b9f3c7ff503d5fb70', 'max_candidates': 5, 'next_run': 1793125370559, 'operations': [], 'post_id': 'p_1c0d5dfc3cbef4308d60d26a', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125369959}, 'server log tail: 2026/10/28 02:22:49 REAL_SEMANTICS listening on 127.0.0.1:63392; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125369728, 'deadline': 1793125489728, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_80f4025b9f3c7ff503d5fb70', 'max_candidates': 5, 'next_run': 1793125370559, 'operations': [], 'post_id': 'p_1c0d5dfc3cbef4308d60d26a', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125369959}, 'server log tail: 2026/10/28 02:22:49 REAL_SEMANTICS listening on 127.0.0.1:63392; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6948
+    },
+    {
+      "name": "invalid_extra_field",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125370429, 'deadline': 1793125490429, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_cb755f77bc0e6b4063e7770e', 'max_candidates': 5, 'next_run': 1793125371261, 'operations': [], 'post_id': 'p_72bb7eb15d656be803f6772e', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125370661}, 'server log tail: 2026/10/28 02:22:50 REAL_SEMANTICS listening on 127.0.0.1:63409; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 3, 'candidates': [], 'created_at': 1793125370429, 'deadline': 1793125490429, 'epoch': 3, 'error': 'AI structured output failed schema or source validation', 'events': [], 'fault': '', 'id': 'j_cb755f77bc0e6b4063e7770e', 'max_candidates': 5, 'next_run': 1793125371261, 'operations': [], 'post_id': 'p_72bb7eb15d656be803f6772e', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125370661}, 'server log tail: 2026/10/28 02:22:50 REAL_SEMANTICS listening on 127.0.0.1:63409; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6984
+    },
+    {
+      "name": "invalid_truncated",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 2, 'candidates': [], 'created_at': 1793125371130, 'deadline': 1793125491130, 'epoch': 2, 'error': 'AI response is incomplete or has an invalid envelope', 'events': [], 'fault': '', 'id': 'j_999b4f372eb8a3f1e6f4d92b', 'max_candidates': 5, 'next_run': 1793125371887, 'operations': [], 'post_id': 'p_5607aa27e82e3e76db9f9867', 'stage': 'UNDERSTAND', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125371287}, 'server log tail: 2026/10/28 02:22:51 REAL_SEMANTICS listening on 127.0.0.1:63424; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 191, in case_invalid\n    check(any(o['status'] == 'INVALID_RESPONSE' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 2, 'candidates': [], 'created_at': 1793125371130, 'deadline': 1793125491130, 'epoch': 2, 'error': 'AI response is incomplete or has an invalid envelope', 'events': [], 'fault': '', 'id': 'j_999b4f372eb8a3f1e6f4d92b', 'max_candidates': 5, 'next_run': 1793125371887, 'operations': [], 'post_id': 'p_5607aa27e82e3e76db9f9867', 'stage': 'UNDERSTAND', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}], 'status': 'FAILED', 'updated_at': 1793125371287}, 'server log tail: 2026/10/28 02:22:51 REAL_SEMANTICS listening on 127.0.0.1:63424; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.7058
+    },
+    {
+      "name": "429_then_success",
+      "expected": "one bounded retry then two-stage completion",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 6, 'candidates': [{'avatar_id': 'fitness', 'name': '运动搭子', 'score': 0.94, 'evidence': ['real_model relevance=0.940', '协议测试预设分数，不是模型质量结论', 'post: 清晨绕街区迈开双腿，慢慢', 'profile: 喜欢跑步、健身和自我成长'], 'actions': ['LIKE', 'COMMENT'], 'status': 'COMPLETED', 'reason': 'SHARED_INTEREST', 'comment': '关于跑步的分享很有意思！你最想交流的是哪一部分？', 'action_states': {'COMMENT': 'SUCCEEDED', 'LIKE': 'SUCCEEDED'}}], 'created_at': 1793125371827, 'deadline': 1793125491827, 'epoch': 6, 'error': '', 'events': [{'id': 'e_0747a29cc8248534d063b6b1', 'interaction_id': 'i_34de9bbf9f7966a71ce3ac3e', 'status': 'PENDING'}, {'id': 'e_08a448dcb1e00640967ecc63', 'interaction_id': 'i_056b0d1c57d00101d2b4fd6d', 'status': 'PENDING'}], 'fault': '', 'id': 'j_8871c4ade0db4806b3971b1f', 'max_candidates': 5, 'next_run': 0, 'operations': [{'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'decision', 'operation_key': 'j_8871c4ade0db4806b3971b1f:decision:fitness:1', 'status': 'SUCCEEDED'}, {'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'comment', 'operation_key': 'j_8871c4ade0db4806b3971b1f:comment:fitness:1', 'status': 'SUCCEEDED'}], 'post_id': 'p_3de8ee14593282b5bc0510b0', 'stage': 'DONE', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-2', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}, {'name': 'MATCH', 'output': {'candidate_count': 1, 'engine': 'real_model', 'frozen': True, 'model': 'local-protocol-model', 'profile_count': 5, 'response_id': 'fixture-match-1', 'scores': [{'avatar_id': 'fitness', 'post_evidence': '清晨绕街区迈开双腿，慢慢', 'profile_evidence': '喜欢跑步、健身和自我成长', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': True, 'score': 0.94}, {'avatar_id': 'art', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'food', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'tech', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'travel', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}], 'strategy': 'full public-profile semantic scoring; no keyword/hash fallback', 'threshold': 0.65}, 'status': 'SUCCEEDED'}, {'name': 'DECIDE', 'output': {'plan': 'LIKE and COMMENT frozen independently', 'private_context': 'used only inside decision; never copied into public generation'}, 'status': 'SUCCEEDED'}, {'name': 'PUBLISH', 'output': {'actions': 'independently idempotent', 'publisher': 'local SQL transaction'}, 'status': 'SUCCEEDED'}], 'status': 'COMPLETED', 'updated_at': 1793125372889}, 'server log tail: 2026/10/28 02:22:51 REAL_SEMANTICS listening on 127.0.0.1:63439; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 202, in case_retry_429\n    check(sum(o['name'] == 'understand-v1' for o in operations(job)) == 2, job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 6, 'candidates': [{'avatar_id': 'fitness', 'name': '运动搭子', 'score': 0.94, 'evidence': ['real_model relevance=0.940', '协议测试预设分数，不是模型质量结论', 'post: 清晨绕街区迈开双腿，慢慢', 'profile: 喜欢跑步、健身和自我成长'], 'actions': ['LIKE', 'COMMENT'], 'status': 'COMPLETED', 'reason': 'SHARED_INTEREST', 'comment': '关于跑步的分享很有意思！你最想交流的是哪一部分？', 'action_states': {'COMMENT': 'SUCCEEDED', 'LIKE': 'SUCCEEDED'}}], 'created_at': 1793125371827, 'deadline': 1793125491827, 'epoch': 6, 'error': '', 'events': [{'id': 'e_0747a29cc8248534d063b6b1', 'interaction_id': 'i_34de9bbf9f7966a71ce3ac3e', 'status': 'PENDING'}, {'id': 'e_08a448dcb1e00640967ecc63', 'interaction_id': 'i_056b0d1c57d00101d2b4fd6d', 'status': 'PENDING'}], 'fault': '', 'id': 'j_8871c4ade0db4806b3971b1f', 'max_candidates': 5, 'next_run': 0, 'operations': [{'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'decision', 'operation_key': 'j_8871c4ade0db4806b3971b1f:decision:fitness:1', 'status': 'SUCCEEDED'}, {'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'comment', 'operation_key': 'j_8871c4ade0db4806b3971b1f:comment:fitness:1', 'status': 'SUCCEEDED'}], 'post_id': 'p_3de8ee14593282b5bc0510b0', 'stage': 'DONE', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-2', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}, {'name': 'MATCH', 'output': {'candidate_count': 1, 'engine': 'real_model', 'frozen': True, 'model': 'local-protocol-model', 'profile_count': 5, 'response_id': 'fixture-match-1', 'scores': [{'avatar_id': 'fitness', 'post_evidence': '清晨绕街区迈开双腿，慢慢', 'profile_evidence': '喜欢跑步、健身和自我成长', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': True, 'score': 0.94}, {'avatar_id': 'art', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'food', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'tech', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'travel', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}], 'strategy': 'full public-profile semantic scoring; no keyword/hash fallback', 'threshold': 0.65}, 'status': 'SUCCEEDED'}, {'name': 'DECIDE', 'output': {'plan': 'LIKE and COMMENT frozen independently', 'private_context': 'used only inside decision; never copied into public generation'}, 'status': 'SUCCEEDED'}, {'name': 'PUBLISH', 'output': {'actions': 'independently idempotent', 'publisher': 'local SQL transaction'}, 'status': 'SUCCEEDED'}], 'status': 'COMPLETED', 'updated_at': 1793125372889}, 'server log tail: 2026/10/28 02:22:51 REAL_SEMANTICS listening on 127.0.0.1:63439; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 1.3316
+    },
+    {
+      "name": "429_exhausts_retry_budget",
+      "expected": "three attempts then FAILED",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "requests": 3,
+        "status": "FAILED"
+      },
+      "failure": null,
+      "elapsed_seconds": 2.6106
+    },
+    {
+      "name": "401_blocks_automatic_and_explicit_resend",
+      "expected": "one call, REJECTED, retry reuses terminal failure",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "IndexError",
+        "message": "('list index out of range', 'server log tail: 2026/10/28 02:22:55 REAL_SEMANTICS listening on 127.0.0.1:63567; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 219, in case_401\n    return {'requests': 1, 'status': 'FAILED', 'operation': operations(job)[0]['status']}\nIndexError: ('list index out of range', 'server log tail: 2026/10/28 02:22:55 REAL_SEMANTICS listening on 127.0.0.1:63567; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6968
+    },
+    {
+      "name": "connection_drop_is_unknown",
+      "expected": "UNKNOWN, retry409, restart makes zero new calls",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "IndexError",
+        "message": "('list index out of range', 'server log tail: 2026/10/28 02:22:56 REAL_SEMANTICS listening on 127.0.0.1:63584; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 226, in case_unknown\n    check(operations(job)[0]['status'] == 'UNKNOWN', job)\nIndexError: ('list index out of range', 'server log tail: 2026/10/28 02:22:56 REAL_SEMANTICS listening on 127.0.0.1:63584; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.698
+    },
+    {
+      "name": "timeout_is_unknown",
+      "expected": "UNKNOWN, retained reservation, no resend",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "IndexError",
+        "message": "('list index out of range', 'server log tail: 2026/10/28 02:22:57 REAL_SEMANTICS listening on 127.0.0.1:63600; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 226, in case_unknown\n    check(operations(job)[0]['status'] == 'UNKNOWN', job)\nIndexError: ('list index out of range', 'server log tail: 2026/10/28 02:22:57 REAL_SEMANTICS listening on 127.0.0.1:63600; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 1.6993
+    },
+    {
+      "name": "crashed_running_becomes_unknown",
+      "expected": "SIGKILL leaves RUNNING, recovery UNKNOWN, no resend",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "IndexError",
+        "message": "('list index out of range', 'server log tail: 2026/10/28 02:22:58 REAL_SEMANTICS listening on 127.0.0.1:63650; moderation, media perception, decisions and comment generation remain simulated\\n2026/10/28 02:22:59 REAL_SEMANTICS listening on 127.0.0.1:63650; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 242, in case_restart_running\n    check(upstream.count() == 1 and operations(job)[0]['status'] == 'UNKNOWN', job)\nIndexError: ('list index out of range', 'server log tail: 2026/10/28 02:22:58 REAL_SEMANTICS listening on 127.0.0.1:63650; moderation, media perception, decisions and comment generation remain simulated\\n2026/10/28 02:22:59 REAL_SEMANTICS listening on 127.0.0.1:63650; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 3.7017
+    },
+    {
+      "name": "completed_understanding_survives_restart",
+      "expected": "understanding reused; ambiguous match not repeated",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 4, 'candidates': [], 'created_at': 1793125382604, 'deadline': 1793125502604, 'epoch': 4, 'error': 'real AI outcome unknown; explicitly abandon the uncertain attempt before authorizing another request', 'events': [], 'fault': '', 'id': 'j_55b2380006d4ec7ceec2a69a', 'max_candidates': 5, 'next_run': 1793125386456, 'operations': [], 'post_id': 'p_56046fe062751e5058672bda', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'NEEDS_RECONCILIATION', 'updated_at': 1793125385856}, 'server log tail: 2026/10/28 02:23:02 REAL_SEMANTICS listening on 127.0.0.1:63774; moderation, media perception, decisions and comment generation remain simulated\\n2026/10/28 02:23:02 REAL_SEMANTICS listening on 127.0.0.1:63774; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 255, in case_cached_understanding\n    check(any(o['name'] == 'understand-v1' and o['status'] == 'SUCCEEDED' for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 4, 'candidates': [], 'created_at': 1793125382604, 'deadline': 1793125502604, 'epoch': 4, 'error': 'real AI outcome unknown; explicitly abandon the uncertain attempt before authorizing another request', 'events': [], 'fault': '', 'id': 'j_55b2380006d4ec7ceec2a69a', 'max_candidates': 5, 'next_run': 1793125386456, 'operations': [], 'post_id': 'p_56046fe062751e5058672bda', 'stage': 'MATCH', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 31, 'model': 'local-protocol-model', 'output_tokens': 17, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': True}, 'status': 'SUCCEEDED'}], 'status': 'NEEDS_RECONCILIATION', 'updated_at': 1793125385856}, 'server log tail: 2026/10/28 02:23:02 REAL_SEMANTICS listening on 127.0.0.1:63774; moderation, media perception, decisions and comment generation remain simulated\\n2026/10/28 02:23:02 REAL_SEMANTICS listening on 127.0.0.1:63774; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 3.7162
+    },
+    {
+      "name": "abandon_then_explicit_billable_retry",
+      "expected": "abandon charges reservation; only explicit retry makes next request",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "IndexError",
+        "message": "('list index out of range', 'server log tail: 2026/10/28 02:23:06 REAL_SEMANTICS listening on 127.0.0.1:63894; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 262, in case_explicit_abandon\n    key = operations(job)[0]['operation_key']\nIndexError: ('list index out of range', 'server log tail: 2026/10/28 02:23:06 REAL_SEMANTICS listening on 127.0.0.1:63894; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6911
+    },
+    {
+      "name": "cross_tenant_unknown_resolution_denied",
+      "expected": "foreign resolve/get404 and owner budget unchanged",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "IndexError",
+        "message": "('list index out of range', 'server log tail: 2026/10/28 02:23:06 REAL_SEMANTICS listening on 127.0.0.1:63909; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 279, in case_cross_tenant_resolution\n    body = {'operation_key': operations(job)[0]['operation_key'], 'resolution': 'abandon_and_charge'}\nIndexError: ('list index out of range', 'server log tail: 2026/10/28 02:23:06 REAL_SEMANTICS listening on 127.0.0.1:63909; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6207
+    },
+    {
+      "name": "delete_during_provider_call",
+      "expected": "late response cannot revive/publish deleted job",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "job_status": "CANCELLED",
+        "interactions": 0,
+        "match_calls": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7636
+    },
+    {
+      "name": "edit_during_provider_call",
+      "expected": "old job superseded; matching receives new version only",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "old_status": "SUPERSEDED",
+        "new_status": "COMPLETED",
+        "match_used_only_new_text": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6897
+    },
+    {
+      "name": "avatar_revoked_during_matching",
+      "expected": "snapshot epoch revalidated; zero revoked candidates/actions",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "candidates": [],
+        "interactions": 0,
+        "profile_snapshot_revalidated": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7063
+    },
+    {
+      "name": "public_profile_payload_and_tenant_isolation",
+      "expected": "public fields only and tenant-scoped profile list",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "demo_profiles": 5,
+        "other_profiles": 4,
+        "private_canary_sent": false,
+        "scope": "payload isolation only; fixture does not prove model resistance to prompt injection"
+      },
+      "failure": null,
+      "elapsed_seconds": 1.2064
+    },
+    {
+      "name": "irrelevant_boolean_overrides_high_score",
+      "expected": "zero candidates despite high scores and keyword post",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "candidates": [],
+        "calls": 2,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6935
+    },
+    {
+      "name": "below_threshold_has_no_rule_fallback",
+      "expected": "zero candidates below threshold",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "candidates": [],
+        "calls": 2,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7395
+    },
+    {
+      "name": "missing_usage_is_explicitly_unknown",
+      "expected": "success with usage_reported=false",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "({'ai_operations': [], 'attempts': 5, 'candidates': [{'avatar_id': 'fitness', 'name': '运动搭子', 'score': 0.94, 'evidence': ['real_model relevance=0.940', '协议测试预设分数，不是模型质量结论', 'post: 清晨绕街区迈开双腿，慢慢', 'profile: 喜欢跑步、健身和自我成长'], 'actions': ['LIKE', 'COMMENT'], 'status': 'COMPLETED', 'reason': 'SHARED_INTEREST', 'comment': '关于跑步的分享很有意思！你最想交流的是哪一部分？', 'action_states': {'COMMENT': 'SUCCEEDED', 'LIKE': 'SUCCEEDED'}}], 'created_at': 1793125392398, 'deadline': 1793125512398, 'epoch': 5, 'error': '', 'events': [{'id': 'e_3414cde98693ead63efce169', 'interaction_id': 'i_0d4eab694fe6e7667a8d14ee', 'status': 'PENDING'}, {'id': 'e_2a282b3a37fa77b4d56f7fa2', 'interaction_id': 'i_61a3317944d61f6e751d7e84', 'status': 'PENDING'}], 'fault': '', 'id': 'j_82c5942a92544798e936918a', 'max_candidates': 5, 'next_run': 0, 'operations': [{'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'decision', 'operation_key': 'j_82c5942a92544798e936918a:decision:fitness:1', 'status': 'SUCCEEDED'}, {'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'comment', 'operation_key': 'j_82c5942a92544798e936918a:comment:fitness:1', 'status': 'SUCCEEDED'}], 'post_id': 'p_be27a1a72e7059150b959292', 'stage': 'DONE', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 0, 'model': 'local-protocol-model', 'output_tokens': 0, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': False}, 'status': 'SUCCEEDED'}, {'name': 'MATCH', 'output': {'candidate_count': 1, 'engine': 'real_model', 'frozen': True, 'model': 'local-protocol-model', 'profile_count': 5, 'response_id': 'fixture-match-1', 'scores': [{'avatar_id': 'fitness', 'post_evidence': '清晨绕街区迈开双腿，慢慢', 'profile_evidence': '喜欢跑步、健身和自我成长', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': True, 'score': 0.94}, {'avatar_id': 'art', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'food', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'tech', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'travel', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}], 'strategy': 'full public-profile semantic scoring; no keyword/hash fallback', 'threshold': 0.65}, 'status': 'SUCCEEDED'}, {'name': 'DECIDE', 'output': {'plan': 'LIKE and COMMENT frozen independently', 'private_context': 'used only inside decision; never copied into public generation'}, 'status': 'SUCCEEDED'}, {'name': 'PUBLISH', 'output': {'actions': 'independently idempotent', 'publisher': 'local SQL transaction'}, 'status': 'SUCCEEDED'}], 'status': 'COMPLETED', 'updated_at': 1793125392820}, 'server log tail: 2026/10/28 02:23:12 REAL_SEMANTICS listening on 127.0.0.1:64072; moderation, media perception, decisions and comment generation remain simulated\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 215, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 410, in run\n    actual = fn(s, upstream)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 356, in case_usage_optional\n    check(len(operations(job)) == 2 and all(not o['usage_reported'] for o in operations(job)), job)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_ai_protocol.py\", line 22, in check\n    raise AssertionError(detail)\nAssertionError: ({'ai_operations': [], 'attempts': 5, 'candidates': [{'avatar_id': 'fitness', 'name': '运动搭子', 'score': 0.94, 'evidence': ['real_model relevance=0.940', '协议测试预设分数，不是模型质量结论', 'post: 清晨绕街区迈开双腿，慢慢', 'profile: 喜欢跑步、健身和自我成长'], 'actions': ['LIKE', 'COMMENT'], 'status': 'COMPLETED', 'reason': 'SHARED_INTEREST', 'comment': '关于跑步的分享很有意思！你最想交流的是哪一部分？', 'action_states': {'COMMENT': 'SUCCEEDED', 'LIKE': 'SUCCEEDED'}}], 'created_at': 1793125392398, 'deadline': 1793125512398, 'epoch': 5, 'error': '', 'events': [{'id': 'e_3414cde98693ead63efce169', 'interaction_id': 'i_0d4eab694fe6e7667a8d14ee', 'status': 'PENDING'}, {'id': 'e_2a282b3a37fa77b4d56f7fa2', 'interaction_id': 'i_61a3317944d61f6e751d7e84', 'status': 'PENDING'}], 'fault': '', 'id': 'j_82c5942a92544798e936918a', 'max_candidates': 5, 'next_run': 0, 'operations': [{'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'decision', 'operation_key': 'j_82c5942a92544798e936918a:decision:fitness:1', 'status': 'SUCCEEDED'}, {'attempt': 1, 'avatar_id': 'fitness', 'cost': 1, 'error': '', 'name': 'comment', 'operation_key': 'j_82c5942a92544798e936918a:comment:fitness:1', 'status': 'SUCCEEDED'}], 'post_id': 'p_be27a1a72e7059150b959292', 'stage': 'DONE', 'stages': [{'name': 'MODERATE', 'output': {'engine': 'deterministic_mock', 'scope': 'text and supplied captions only; not real media moderation', 'verdict': 'PASS'}, 'status': 'SUCCEEDED'}, {'name': 'UNDERSTAND', 'output': {'analysis': {'intent': '寻找一起坚持的同伴', 'summary': '希望结伴进行耐力活动。', 'topics': ['耐力活动']}, 'engine': 'real_model', 'input_tokens': 0, 'model': 'local-protocol-model', 'output_tokens': 0, 'response_id': 'fixture-understand-1', 'scope': 'text and supplied captions; raw media not analyzed', 'usage_reported': False}, 'status': 'SUCCEEDED'}, {'name': 'MATCH', 'output': {'candidate_count': 1, 'engine': 'real_model', 'frozen': True, 'model': 'local-protocol-model', 'profile_count': 5, 'response_id': 'fixture-match-1', 'scores': [{'avatar_id': 'fitness', 'post_evidence': '清晨绕街区迈开双腿，慢慢', 'profile_evidence': '喜欢跑步、健身和自我成长', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': True, 'score': 0.94}, {'avatar_id': 'art', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'food', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'tech', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}, {'avatar_id': 'travel', 'post_evidence': '', 'profile_evidence': '', 'reason': '协议测试预设分数，不是模型质量结论', 'relevant': False, 'score': 0.08}], 'strategy': 'full public-profile semantic scoring; no keyword/hash fallback', 'threshold': 0.65}, 'status': 'SUCCEEDED'}, {'name': 'DECIDE', 'output': {'plan': 'LIKE and COMMENT frozen independently', 'private_context': 'used only inside decision; never copied into public generation'}, 'status': 'SUCCEEDED'}, {'name': 'PUBLISH', 'output': {'actions': 'independently idempotent', 'publisher': 'local SQL transaction'}, 'status': 'SUCCEEDED'}], 'status': 'COMPLETED', 'updated_at': 1793125392820}, 'server log tail: 2026/10/28 02:23:12 REAL_SEMANTICS listening on 127.0.0.1:64072; moderation, media perception, decisions and comment generation remain simulated\\n')\n"
+      },
+      "elapsed_seconds": 0.6992
+    }
+  ]
+}

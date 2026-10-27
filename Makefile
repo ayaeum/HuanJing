@@ -16,3 +16,10 @@ clean:
 test-e2e: build
 	E2E_BINARY=$(CURDIR)/bin/huanjing python3 scripts/e2e_contract.py
 	E2E_BINARY=$(CURDIR)/bin/huanjing python3 scripts/e2e_lifecycle.py
+
+.PHONY: test-ai-protocol test-ai-live
+test-ai-protocol: build
+	E2E_BINARY=$(CURDIR)/bin/huanjing python3 scripts/e2e_ai_protocol.py
+# Explicit opt-in: uses configured credentials and incurs real provider usage.
+test-ai-live: build
+	E2E_BINARY=$(CURDIR)/bin/huanjing python3 scripts/e2e_semantics_live.py

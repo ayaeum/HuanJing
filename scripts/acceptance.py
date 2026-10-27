@@ -6,7 +6,7 @@ TERMINAL={'COMPLETED','PARTIAL_COMPLETED','REJECTED','FAILED','CANCELLED','EXPIR
 def main():
     with tempfile.TemporaryDirectory(prefix='huanjing-acceptance-') as tmp:
         sock=socket.socket();sock.bind(('127.0.0.1',0));port=sock.getsockname()[1];sock.close()
-        base=f'http://127.0.0.1:{port}'; env=dict(os.environ,ADDR=f'127.0.0.1:{port}',DB_PATH=tmp+'/system.db',WEB_DIR=str(ROOT/'web'),WORKERS='2')
+        base=f'http://127.0.0.1:{port}'; env=dict(os.environ,AI_MODE="test_fixture",ADDR=f'127.0.0.1:{port}',DB_PATH=tmp+'/system.db',WEB_DIR=str(ROOT/'web'),WORKERS='2')
         log=open(tmp+'/server.log','w'); proc=None; results=[]
         def call(method,path,body=None,key=None,tenant='demo'):
             headers={'Content-Type':'application/json','X-Tenant-ID':tenant}

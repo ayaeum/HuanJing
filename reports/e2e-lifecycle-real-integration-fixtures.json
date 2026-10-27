@@ -1,0 +1,446 @@
+{
+  "suite": "e2e-lifecycle",
+  "started_at_utc": "2026-10-27T18:31:03.665198+00:00",
+  "finished_at_utc": "2026-10-27T18:32:07.906919+00:00",
+  "scope": "HTTP-only black-box; isolated SQLite state and random localhost port per case; deterministic MOCK providers",
+  "binary_sha256": "e3bfc88fd72e4e19c16d6ee07cb7e64cdc6e967305c96e56e1bef5e6f5ef01b3",
+  "cases_total": 28,
+  "passed": 28,
+  "failed": 0,
+  "elapsed_seconds": 64.2432,
+  "cases": [
+    {
+      "name": "01-ignore-plan",
+      "expected": "Exactly the frozen plan [] is published, with independent receipts and no private prompt leakage",
+      "status": "PASS",
+      "actual": {
+        "job_status": "COMPLETED",
+        "planned_actions": [],
+        "published_actions": []
+      },
+      "failure": null,
+      "elapsed_seconds": 1.3112
+    },
+    {
+      "name": "02-like-only-plan",
+      "expected": "Exactly the frozen plan ['LIKE'] is published, with independent receipts and no private prompt leakage",
+      "status": "PASS",
+      "actual": {
+        "job_status": "COMPLETED",
+        "planned_actions": [
+          "LIKE"
+        ],
+        "published_actions": [
+          "LIKE"
+        ]
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7948
+    },
+    {
+      "name": "03-comment-only-plan",
+      "expected": "Exactly the frozen plan ['COMMENT'] is published, with independent receipts and no private prompt leakage",
+      "status": "PASS",
+      "actual": {
+        "job_status": "COMPLETED",
+        "planned_actions": [
+          "COMMENT"
+        ],
+        "published_actions": [
+          "COMMENT"
+        ]
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5191
+    },
+    {
+      "name": "04-combined-plan",
+      "expected": "Exactly the frozen plan ['LIKE', 'COMMENT'] is published, with independent receipts and no private prompt leakage",
+      "status": "PASS",
+      "actual": {
+        "job_status": "COMPLETED",
+        "planned_actions": [
+          "LIKE",
+          "COMMENT"
+        ],
+        "published_actions": [
+          "COMMENT",
+          "LIKE"
+        ]
+      },
+      "failure": null,
+      "elapsed_seconds": 0.4956
+    },
+    {
+      "name": "05-comment-output-rejected",
+      "expected": "LIKE survives; COMMENT is REJECTED; job PARTIAL_COMPLETED",
+      "status": "PASS",
+      "actual": {
+        "status": "PARTIAL_COMPLETED",
+        "actions": {
+          "COMMENT": "REJECTED",
+          "LIKE": "SUCCEEDED"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.2971
+    },
+    {
+      "name": "06-transient-provider-retry",
+      "expected": "One failed and one successful understanding attempt; both actions once; 4 cost units",
+      "status": "PASS",
+      "actual": {
+        "attempts": [
+          [
+            1,
+            "FAILED"
+          ],
+          [
+            2,
+            "SUCCEEDED"
+          ]
+        ],
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 4
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 1.06
+    },
+    {
+      "name": "07-bounded-provider-failure",
+      "expected": "Exactly 3 failed provider attempts; FAILED with no fake IGNORE or interactions",
+      "status": "PASS",
+      "actual": {
+        "status": "FAILED",
+        "provider_attempts": 3,
+        "published_actions": []
+      },
+      "failure": null,
+      "elapsed_seconds": 2.177
+    },
+    {
+      "name": "08-zero-budget-topup-recovery",
+      "expected": "Zero-cost failure, explicit budget top-up and retry completes without overspend",
+      "status": "PASS",
+      "actual": {
+        "before": {
+          "limit": 0,
+          "reserved": 0,
+          "spent": 0
+        },
+        "after": {
+          "limit": 3,
+          "reserved": 0,
+          "spent": 3
+        },
+        "recovered_status": "COMPLETED"
+      },
+      "failure": null,
+      "elapsed_seconds": 2.4047
+    },
+    {
+      "name": "09-exact-budget-and-lower-limit",
+      "expected": "3 units complete one job; reducing below spent returns 409; next job fails without overspend",
+      "status": "PASS",
+      "actual": {
+        "budget": {
+          "limit": 3,
+          "reserved": 0,
+          "spent": 3
+        },
+        "second_job": "FAILED",
+        "lower_limit_http": 409
+      },
+      "failure": null,
+      "elapsed_seconds": 2.374
+    },
+    {
+      "name": "10-partial-budget-action-retry",
+      "expected": "2-unit budget preserves LIKE; 1-unit top-up adds COMMENT and retains LIKE receipt",
+      "status": "PASS",
+      "actual": {
+        "failed_stage": "PUBLISH",
+        "like_receipt_preserved": true,
+        "final_actions": [
+          "COMMENT",
+          "LIKE"
+        ]
+      },
+      "failure": null,
+      "elapsed_seconds": 2.694
+    },
+    {
+      "name": "11-unknown-receipt-reconcile",
+      "expected": "UNKNOWN retains reservation and prior LIKE; ordinary retry rejected; reconciliation adds one COMMENT",
+      "status": "PASS",
+      "actual": {
+        "unknown_actions": {
+          "COMMENT": "UNKNOWN",
+          "LIKE": "SUCCEEDED"
+        },
+        "final_actions": {
+          "COMMENT": "SUCCEEDED",
+          "LIKE": "SUCCEEDED"
+        },
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 3
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5441
+    },
+    {
+      "name": "12-unknown-delete-accounting",
+      "expected": "Deleting UNKNOWN job hides post and cancels; receipt accounting settles without republishing",
+      "status": "PASS",
+      "actual": {
+        "status": "CANCELLED",
+        "post_http": 410,
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 3
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5067
+    },
+    {
+      "name": "13-unknown-edit-accounting",
+      "expected": "Old UNKNOWN job remains SUPERSEDED after accounting; latest version completes with unique actions",
+      "status": "PASS",
+      "actual": {
+        "old_status": "SUPERSEDED",
+        "new_status": "COMPLETED",
+        "travel_actions": [
+          "LIKE",
+          "COMMENT"
+        ],
+        "reserved": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.8802
+    },
+    {
+      "name": "14-restart-running-understand",
+      "expected": "SIGKILL recovers leased stage from one durable provider receipt with no double charge",
+      "status": "PASS",
+      "actual": {
+        "epoch_before": 2,
+        "epoch_after": 6,
+        "understand_provider_attempts": 1,
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 3
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 6.9969
+    },
+    {
+      "name": "15-restart-after-like",
+      "expected": "SIGKILL during COMMENT preserves LIKE receipt and recovers one COMMENT",
+      "status": "PASS",
+      "actual": {
+        "preserved_like_receipt": true,
+        "comment_attempts": 1,
+        "actions": [
+          "COMMENT",
+          "LIKE"
+        ]
+      },
+      "failure": null,
+      "elapsed_seconds": 6.8909
+    },
+    {
+      "name": "16-restart-unknown-state",
+      "expected": "Restart preserves UNKNOWN and reserved cost until explicit reconciliation",
+      "status": "PASS",
+      "actual": {
+        "status_after_restart_before_reconcile": "NEEDS_RECONCILIATION",
+        "reserved_preserved": 1,
+        "final_status": "COMPLETED"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.796
+    },
+    {
+      "name": "17-cancel-orphan-running-receipt",
+      "expected": "SIGKILL then cancellation permits cost settlement of orphan RUNNING receipt, with zero interactions",
+      "status": "PASS",
+      "actual": {
+        "status": "CANCELLED",
+        "durable_running_receipt_settled": true,
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 1
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.8746
+    },
+    {
+      "name": "18-concurrent-edit-version-fence",
+      "expected": "Two expected_version=1 edits yield one 202 and one 409; old worker remains SUPERSEDED",
+      "status": "PASS",
+      "actual": {
+        "concurrent_edit_codes": [
+          202,
+          409
+        ],
+        "version": 2,
+        "old_status_after_late_worker": "SUPERSEDED"
+      },
+      "failure": null,
+      "elapsed_seconds": 2.35
+    },
+    {
+      "name": "19-edit-frozen-like-plan",
+      "expected": "New text requesting COMMENT cannot expand a previously frozen LIKE-only plan",
+      "status": "PASS",
+      "actual": {
+        "new_text_requested_mock": "COMMENT",
+        "frozen_plan": [
+          "LIKE"
+        ],
+        "like_receipt_unchanged": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7725
+    },
+    {
+      "name": "20-edit-frozen-ignore-plan",
+      "expected": "A committed empty decision remains empty after content edit",
+      "status": "PASS",
+      "actual": {
+        "frozen_plan": [],
+        "candidate_status": "IGNORED"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.776
+    },
+    {
+      "name": "21-delete-inflight-fence",
+      "expected": "Delete during model call prevents late publication, hides post, and rejects retry",
+      "status": "PASS",
+      "actual": {
+        "status_after_late_response": "CANCELLED",
+        "visible_posts": 0,
+        "interactions": 0,
+        "retry_http": 409
+      },
+      "failure": null,
+      "elapsed_seconds": 1.925
+    },
+    {
+      "name": "22-avatar-revocation-fence",
+      "expected": "Revoking candidate during decision makes both actions STALE and job FAILED",
+      "status": "PASS",
+      "actual": {
+        "status": "FAILED",
+        "action_states": {
+          "COMMENT": "STALE",
+          "LIKE": "STALE"
+        },
+        "interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 5.6014
+    },
+    {
+      "name": "23-private-memory-revocation",
+      "expected": "Decision using a memory later revoked cannot publish or leak private content",
+      "status": "PASS",
+      "actual": {
+        "revoked_source_type": "private seed memory",
+        "status": "FAILED",
+        "action_states": {
+          "COMMENT": "STALE",
+          "LIKE": "STALE"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 5.656
+    },
+    {
+      "name": "24-derived-source-deletion",
+      "expected": "Deleting a source post revokes derived memory and fences another post's pending actions",
+      "status": "PASS",
+      "actual": {
+        "source_memories_revoked": 2,
+        "target_status": "FAILED",
+        "target_actions": []
+      },
+      "failure": null,
+      "elapsed_seconds": 6.1524
+    },
+    {
+      "name": "25-business-deadline-fence",
+      "expected": "Slow job reaches EXPIRED; late provider result cannot publish or overwrite terminal status",
+      "status": "PASS",
+      "actual": {
+        "status": "EXPIRED",
+        "interactions": 0,
+        "status_after_late_response": "EXPIRED"
+      },
+      "failure": null,
+      "elapsed_seconds": 3.8717
+    },
+    {
+      "name": "26-concurrent-idempotent-submit",
+      "expected": "10 simultaneous identical submissions create one post/job and exactly two independent actions",
+      "status": "PASS",
+      "actual": {
+        "concurrent_requests": 10,
+        "unique_posts": 1,
+        "unique_jobs": 1,
+        "interactions": 2
+      },
+      "failure": null,
+      "elapsed_seconds": 0.4166
+    },
+    {
+      "name": "27-budget-survives-restart",
+      "expected": "Spent budget survives process death; restart cannot regain consumed units",
+      "status": "PASS",
+      "actual": {
+        "persistent_budget": {
+          "limit": 3,
+          "reserved": 0,
+          "spent": 3
+        },
+        "next_job_after_restart": "FAILED"
+      },
+      "failure": null,
+      "elapsed_seconds": 2.6208
+    },
+    {
+      "name": "28-concurrent-hard-budget",
+      "expected": "10 posts with 8 workers share 5 units; spent+reserved never exceeds 5 and all jobs settle",
+      "status": "PASS",
+      "actual": {
+        "concurrent_posts": 10,
+        "samples": 67,
+        "peak_observed_spent_plus_reserved": 5,
+        "limit": 5,
+        "final_budget": {
+          "limit": 5,
+          "reserved": 0,
+          "spent": 5
+        },
+        "job_statuses": {
+          "FAILED": 10
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 2.4839
+    }
+  ]
+}

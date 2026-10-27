@@ -1,0 +1,219 @@
+{
+  "health": {
+    "budget_unit": "request allowance; not currency",
+    "mode": "REAL_SEMANTICS",
+    "remaining_simulations": "moderation, raw media perception, action decisions, comment generation",
+    "semantics": "real_model",
+    "status": "ok"
+  },
+  "created": {
+    "job_id": "j_8c0b189d434aaedeee9a4848",
+    "post_id": "p_1750e1de8f8b6ced41d6228a",
+    "status": "ACCEPTED"
+  },
+  "job": {
+    "ai_operations": [
+      {
+        "attempt": 1,
+        "error": "",
+        "input_tokens": 177,
+        "model": "gpt-5.6-luna",
+        "name": "understand-v1",
+        "operation_key": "j_8c0b189d434aaedeee9a4848:understand-v1:1",
+        "output_tokens": 132,
+        "response_id": "resp_0d7ec5f3085b116d016ae0ee13615c819e924fc3c820ee5216",
+        "status": "SUCCEEDED",
+        "usage_reported": true
+      },
+      {
+        "attempt": 1,
+        "error": "",
+        "input_tokens": 651,
+        "model": "gpt-5.6-luna",
+        "name": "match-v1",
+        "operation_key": "j_8c0b189d434aaedeee9a4848:match-v1:1",
+        "output_tokens": 373,
+        "response_id": "resp_0acc53a27d3e7033016ae0ee166570819fbd9d9cda58e4bef6",
+        "status": "SUCCEEDED",
+        "usage_reported": true
+      }
+    ],
+    "attempts": 5,
+    "candidates": [
+      {
+        "avatar_id": "fitness",
+        "name": "运动搭子",
+        "score": 1,
+        "evidence": [
+          "real_model relevance=1.000",
+          "帖子直接讨论半程马拉松中的配速与体力分配，符合跑步和马拉松兴趣",
+          "post: 后半程掉速严重，怎么分配体力？",
+          "profile: 跑步 健身 运动 马拉松 fitness running"
+        ],
+        "actions": [
+          "LIKE",
+          "COMMENT"
+        ],
+        "status": "COMPLETED",
+        "reason": "SHARED_INTEREST",
+        "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+        "action_states": {
+          "COMMENT": "SUCCEEDED",
+          "LIKE": "SUCCEEDED"
+        }
+      }
+    ],
+    "created_at": 1793125904644,
+    "deadline": 1793126024644,
+    "epoch": 5,
+    "error": "",
+    "events": [
+      {
+        "id": "e_5c44b93cc3caf488d24e0bc7",
+        "interaction_id": "i_8036a64a2aad1420cd71bb5f",
+        "status": "DELIVERED"
+      },
+      {
+        "id": "e_276e71eeeb917527d0dd09af",
+        "interaction_id": "i_0d9864a69b3227bff0e5ed66",
+        "status": "DELIVERED"
+      }
+    ],
+    "fault": "",
+    "id": "j_8c0b189d434aaedeee9a4848",
+    "max_candidates": 5,
+    "next_run": 0,
+    "operations": [
+      {
+        "attempt": 1,
+        "avatar_id": "fitness",
+        "cost": 1,
+        "error": "",
+        "name": "decision",
+        "operation_key": "j_8c0b189d434aaedeee9a4848:decision:fitness:1",
+        "status": "SUCCEEDED"
+      },
+      {
+        "attempt": 1,
+        "avatar_id": "fitness",
+        "cost": 1,
+        "error": "",
+        "name": "comment",
+        "operation_key": "j_8c0b189d434aaedeee9a4848:comment:fitness:1",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "post_id": "p_1750e1de8f8b6ced41d6228a",
+    "stage": "DONE",
+    "stages": [
+      {
+        "name": "MODERATE",
+        "output": {
+          "engine": "deterministic_mock",
+          "scope": "text and supplied captions only; not real media moderation",
+          "verdict": "PASS"
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "UNDERSTAND",
+        "output": {
+          "analysis": {
+            "intent": "分享首次半马后程掉速经历，并请教如何规划配速、分配体力以提升完赛表现。",
+            "summary": "用户首次挑战21.0975公里半程马拉松，后半程出现明显掉速，正在寻求更合理的体力分配和配速策略。",
+            "topics": [
+              "半程马拉松",
+              "跑步配速",
+              "体力分配",
+              "后半程掉速",
+              "耐力训练"
+            ]
+          },
+          "engine": "real_model",
+          "input_tokens": 177,
+          "model": "gpt-5.6-luna",
+          "output_tokens": 132,
+          "response_id": "resp_0d7ec5f3085b116d016ae0ee13615c819e924fc3c820ee5216",
+          "scope": "text and supplied captions; raw media not analyzed",
+          "usage_reported": true
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "MATCH",
+        "output": {
+          "candidate_count": 1,
+          "engine": "real_model",
+          "frozen": true,
+          "model": "gpt-5.6-luna",
+          "profile_count": 5,
+          "response_id": "resp_0acc53a27d3e7033016ae0ee166570819fbd9d9cda58e4bef6",
+          "scores": [
+            {
+              "avatar_id": "fitness",
+              "post_evidence": "后半程掉速严重，怎么分配体力？",
+              "profile_evidence": "跑步 健身 运动 马拉松 fitness running",
+              "reason": "帖子直接讨论半程马拉松中的配速与体力分配，符合跑步和马拉松兴趣",
+              "relevant": true,
+              "score": 1
+            },
+            {
+              "avatar_id": "travel",
+              "post_evidence": "21.0975公里",
+              "profile_evidence": "徒步 旅行 山野 自然 摄影 hiking travel",
+              "reason": "虽然半马属于户外活动，但帖子未涉及徒步、旅行或自然主题",
+              "relevant": false,
+              "score": 0.2
+            },
+            {
+              "avatar_id": "art",
+              "post_evidence": "",
+              "profile_evidence": "",
+              "reason": "帖子主题是半程马拉松训练，与艺术创作无关",
+              "relevant": false,
+              "score": 0
+            },
+            {
+              "avatar_id": "food",
+              "post_evidence": "",
+              "profile_evidence": "",
+              "reason": "帖子主题是跑步训练，与烹饪和咖啡无关",
+              "relevant": false,
+              "score": 0
+            },
+            {
+              "avatar_id": "tech",
+              "post_evidence": "",
+              "profile_evidence": "",
+              "reason": "帖子未涉及编程、AI或开源技术",
+              "relevant": false,
+              "score": 0
+            }
+          ],
+          "strategy": "full public-profile semantic scoring; no keyword/hash fallback",
+          "threshold": 0.65
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "DECIDE",
+        "output": {
+          "plan": "LIKE and COMMENT frozen independently",
+          "private_context": "used only inside decision; never copied into public generation"
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "PUBLISH",
+        "output": {
+          "actions": "independently idempotent",
+          "publisher": "local SQL transaction"
+        },
+        "status": "SUCCEEDED"
+      }
+    ],
+    "status": "COMPLETED",
+    "updated_at": 1793125914025
+  },
+  "mode_from_stats": "REAL_SEMANTICS"
+}

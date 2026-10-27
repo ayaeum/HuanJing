@@ -1,0 +1,54 @@
+{
+  "verified_at": "2026-10-27T18:34:53.047234+00:00",
+  "backend_commit": "cd3aca9",
+  "frontend_commit": "11d8803",
+  "final_binary_sha256": "e3bfc88fd72e4e19c16d6ee07cb7e64cdc6e967305c96e56e1bef5e6f5ef01b3",
+  "source_sha256": {
+    "cmd/server/main.go": "dc0e7e518c8fec6d85c06f14f0ff825aea41f63d5f2fa6747002da782c766b73",
+    "internal/app/ai.go": "44e3fa910ac97619000b3bdfc63f9da122308fab48fef4e9d9435e687e4bfea9",
+    "internal/app/app_test.go": "ce4b8c6c0534c8414a18066e7dbf5d0cc6ead3cd1c345c8d869fd7218b95f01a",
+    "internal/app/fixture_matching.go": "246a8ca4742ec5a775f827e7c6933a0ebea9fb61ad66cd76f378b9118a58a0d6",
+    "internal/app/http.go": "a62109d8a7da3c97075cdefe6abe70d5a7280929272b79c7ce575969f6467263",
+    "internal/app/lifecycle.go": "bbf85dcf3f62dca16e1b848a66ac361ff02f3dbd419af69ff41ed67755ccb60b",
+    "internal/app/semantic.go": "87d20d9737c0613dbb976d840aca3a2f81c7ea923077a09375b4336a82b829c2",
+    "internal/app/store.go": "7a9855ad3fc0fc146605ce0d252d5223e79658f2095c1be606e92ee582ba23cf",
+    "internal/app/worker.go": "700008e0983bb188c2327b4ac851bc6b82be52ec715fb0f6861ab412a22e1442",
+    "web/app.js": "d3fe8514a529f7495f51992e59d6e605f4957d49f656519aaf50a41d2fcd393e",
+    "web/index.html": "de06167ec71cd04335d206a116c37f4ab877033c9f6217550c1dc2bd795dd2d3"
+  },
+  "reports": {
+    "e2e-semantics-live": {
+      "passed": 8,
+      "failed": 0,
+      "binary_sha256": "66f71c1b36597f241c144661e0193a39b7d75848b6c925695915f2bfcee298d3"
+    },
+    "e2e-ai-protocol": {
+      "passed": 32,
+      "failed": 0,
+      "binary_sha256": "e3bfc88fd72e4e19c16d6ee07cb7e64cdc6e967305c96e56e1bef5e6f5ef01b3"
+    },
+    "e2e-contract-real-integration-fixtures": {
+      "passed": 47,
+      "failed": 0,
+      "binary_sha256": "e3bfc88fd72e4e19c16d6ee07cb7e64cdc6e967305c96e56e1bef5e6f5ef01b3"
+    },
+    "e2e-lifecycle-real-integration-fixtures": {
+      "passed": 28,
+      "failed": 0,
+      "binary_sha256": "e3bfc88fd72e4e19c16d6ee07cb7e64cdc6e967305c96e56e1bef5e6f5ef01b3"
+    }
+  },
+  "checks": [
+    "go test -race ./...",
+    "go vet ./...",
+    "8 real provider semantic samples",
+    "2 real browser publications",
+    "32 protocol-fixture cases",
+    "47 contract-fixture cases",
+    "28 lifecycle-fixture cases",
+    "one actual real-model publication and health/stats check on final 8080 binary",
+    "credential and endpoint absence scan"
+  ],
+  "build_note": "Semantic sample suite and browser used an earlier binary before the stats-only metadata correction (LOCAL_MOCK -> configured mode). AI provider and semantic implementation were unchanged. Final protocol/workflow reports and final 8080 real call use final_binary_sha256. UI fault-option labeling received a subsequent syntax/offline-mode check without another billable browser publication.",
+  "scope": "Gateway model labels are not independent model identity verification. Token counts are provider reported; request allowances are not currency. Raw media, moderation, action decisions and comment generation remain simulated."
+}

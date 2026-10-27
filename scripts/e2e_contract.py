@@ -45,7 +45,7 @@ def upload(s, data=None, caption='徒步旅行照片', name='fixture.png', decla
 
 def case_health(s):
     body = expect(s, 'GET', '/api/health', 200)
-    check(body['mode'] == 'LOCAL_MOCK', body)
+    check(body['mode'] == 'TEST_FIXTURE', body)
     return body
 
 
@@ -370,7 +370,7 @@ def case_match_english_word_boundaries(s):
 
 
 CASES = [
-    ('health_mock_mode', '200 and LOCAL_MOCK mode', case_health),
+    ('health_mock_mode', '200 and TEST_FIXTURE mode', case_health),
     ('missing_idempotency_key', '400; zero posts/jobs', invalid_post({'text': TEXT}, key=None)),
     ('empty_content', '400; zero posts/jobs', invalid_post({'text': '   '})),
     ('unknown_json_field', '400; zero posts/jobs', invalid_post({'text': TEXT, 'invented': True})),

@@ -49,9 +49,10 @@ def build_binary():
 
 
 class Server:
-    def __init__(self, binary=None, workers=4, seed_tenants="demo,other"):
+    def __init__(self, binary=None, workers=4, seed_tenants="demo,other", env_overrides=None):
         self.binary = pathlib.Path(binary) if binary else build_binary()
         self.workers = workers
+        self.env_overrides = dict(env_overrides or {})
         self.seed_tenants = seed_tenants
         self._tmp = tempfile.TemporaryDirectory(prefix="huanjing-e2e-case-")
         self.directory = pathlib.Path(self._tmp.name)
@@ -85,7 +86,8 @@ class Server:
             raise RuntimeError("server is already running")
         if self.log is None:
             self.log = self.log_path.open("a", encoding="utf-8")
-        env = dict(os.environ, ADDR="127.0.0.1:" + str(self.port), DB_PATH=str(self.db_path), WEB_DIR=str(ROOT / "web"), WORKERS=str(self.workers), SEED_TENANTS=self.seed_tenants)
+        env = dict(os.environ, AI_MODE="test_fixture", ADDR="127.0.0.1:" + str(self.port), DB_PATH=str(self.db_path), WEB_DIR=str(ROOT / "web"), WORKERS=str(self.workers), SEED_TENANTS=self.seed_tenants)
+        env.update(self.env_overrides)
         self.proc = subprocess.Popen([str(self.binary)], cwd=ROOT, env=env, stdout=self.log, stderr=self.log)
         end = time.monotonic() + 15
         while time.monotonic() < end:

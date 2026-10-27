@@ -1,0 +1,461 @@
+{
+  "suite": "real-ai-adapter-local-protocol-fixture",
+  "started_at_utc": "2026-10-27T18:31:06.313865+00:00",
+  "finished_at_utc": "2026-10-27T18:31:38.641957+00:00",
+  "scope": "HTTP-only black-box; isolated SQLite state and random localhost port per case; deterministic MOCK providers",
+  "binary_sha256": "e3bfc88fd72e4e19c16d6ee07cb7e64cdc6e967305c96e56e1bef5e6f5ef01b3",
+  "cases_total": 32,
+  "passed": 32,
+  "failed": 0,
+  "elapsed_seconds": 32.3279,
+  "cases": [
+    {
+      "name": "default_mode_requires_configuration",
+      "expected": "startup fails with blank AI configuration; no implicit fixture mode",
+      "status": "PASS",
+      "actual": {
+        "startup": "rejected",
+        "configuration": "explicitly blank test values",
+        "silent_fixture_fallback": false
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0498
+    },
+    {
+      "name": "two_real_adapter_stages_and_usage",
+      "expected": "two HTTP calls, usage retained, fixture non-keyword candidate",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "requests": 2,
+        "candidates": [
+          "fitness"
+        ],
+        "input_tokens": 62,
+        "output_tokens": 34,
+        "evidence_scope": "protocol fixture selected a non-keyword candidate; not semantic-quality evidence"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6909
+    },
+    {
+      "name": "invalid_malformed_understand",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 1,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7041
+    },
+    {
+      "name": "invalid_missing_understand",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 1,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7101
+    },
+    {
+      "name": "invalid_missing_profile",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6245
+    },
+    {
+      "name": "invalid_duplicate_profile",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6961
+    },
+    {
+      "name": "invalid_unknown_profile",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6137
+    },
+    {
+      "name": "invalid_out_of_range",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6884
+    },
+    {
+      "name": "invalid_null_score",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7008
+    },
+    {
+      "name": "invalid_missing_relevant",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6952
+    },
+    {
+      "name": "invalid_forged_evidence",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.689
+    },
+    {
+      "name": "invalid_extra_field",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 2,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6986
+    },
+    {
+      "name": "invalid_truncated",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 1,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.8118
+    },
+    {
+      "name": "invalid_credential_echo",
+      "expected": "FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "FAILED",
+        "requests": 1,
+        "explicit_retry_extra_calls": 0,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.9938
+    },
+    {
+      "name": "429_then_success",
+      "expected": "one bounded retry then two-stage completion",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "understand_requests": 2,
+        "match_requests": 1,
+        "status": "COMPLETED"
+      },
+      "failure": null,
+      "elapsed_seconds": 1.3397
+    },
+    {
+      "name": "429_exhausts_retry_budget",
+      "expected": "three attempts then FAILED",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "requests": 3,
+        "status": "FAILED"
+      },
+      "failure": null,
+      "elapsed_seconds": 2.616
+    },
+    {
+      "name": "401_blocks_automatic_and_explicit_resend",
+      "expected": "one call, REJECTED, retry reuses terminal failure",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "requests": 1,
+        "status": "FAILED",
+        "operation": "REJECTED"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6074
+    },
+    {
+      "name": "connection_drop_is_unknown",
+      "expected": "UNKNOWN, retry409, restart makes zero new calls",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "NEEDS_RECONCILIATION",
+        "requests_after_restart": 1,
+        "budget": {
+          "limit": 10000,
+          "reserved": 1,
+          "spent": 0
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6122
+    },
+    {
+      "name": "timeout_is_unknown",
+      "expected": "UNKNOWN, retained reservation, no resend",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "status": "NEEDS_RECONCILIATION",
+        "requests_after_restart": 1,
+        "budget": {
+          "limit": 10000,
+          "reserved": 1,
+          "spent": 0
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 1.6977
+    },
+    {
+      "name": "crashed_running_becomes_unknown",
+      "expected": "SIGKILL leaves RUNNING, recovery UNKNOWN, no resend",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "requests": 1,
+        "job_status": "NEEDS_RECONCILIATION",
+        "running_recovered_as": "UNKNOWN"
+      },
+      "failure": null,
+      "elapsed_seconds": 3.7078
+    },
+    {
+      "name": "completed_understanding_survives_restart",
+      "expected": "understanding reused; ambiguous match not repeated",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "understanding_calls_after_restart": 1,
+        "match_calls_after_restart": 1,
+        "status": "NEEDS_RECONCILIATION"
+      },
+      "failure": null,
+      "elapsed_seconds": 3.705
+    },
+    {
+      "name": "abandon_then_explicit_billable_retry",
+      "expected": "abandon charges reservation; only explicit retry makes next request",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "abandon_did_not_retry": true,
+        "explicit_retry_requests": 2,
+        "final_status": "COMPLETED"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7785
+    },
+    {
+      "name": "cross_tenant_unknown_resolution_denied",
+      "expected": "foreign resolve/get404 and owner budget unchanged",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "foreign_resolution": 404,
+        "foreign_job_read": 404,
+        "owner_reserved": 1
+      },
+      "failure": null,
+      "elapsed_seconds": 0.698
+    },
+    {
+      "name": "deleted_unknown_can_settle_without_revival",
+      "expected": "deleted job retains billing metadata; abandon settles budget without retry",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "deleted_job_exposes_only_billing_metadata": true,
+        "status": "CANCELLED",
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 1
+        },
+        "calls": 1
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6157
+    },
+    {
+      "name": "deleted_orphan_running_can_settle",
+      "expected": "cancelled orphan request remains resolvable after process death",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "orphan_prior_status": "RUNNING",
+        "job_status": "CANCELLED",
+        "budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 1
+        },
+        "requests": 1
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6185
+    },
+    {
+      "name": "delete_during_provider_call",
+      "expected": "late response cannot revive/publish deleted job",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "job_status": "CANCELLED",
+        "interactions": 0,
+        "match_calls": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7267
+    },
+    {
+      "name": "edit_during_provider_call",
+      "expected": "old job superseded; matching receives new version only",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "old_status": "SUPERSEDED",
+        "new_status": "COMPLETED",
+        "match_used_only_new_text": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7001
+    },
+    {
+      "name": "avatar_revoked_during_matching",
+      "expected": "snapshot epoch revalidated; zero revoked candidates/actions",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "candidates": [],
+        "interactions": 0,
+        "profile_snapshot_revalidated": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.8675
+    },
+    {
+      "name": "public_profile_payload_and_tenant_isolation",
+      "expected": "public fields only and tenant-scoped profile list",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "demo_profiles": 5,
+        "other_profiles": 4,
+        "private_canary_sent": false,
+        "scope": "payload isolation only; fixture does not prove model resistance to prompt injection"
+      },
+      "failure": null,
+      "elapsed_seconds": 1.578
+    },
+    {
+      "name": "irrelevant_boolean_overrides_high_score",
+      "expected": "zero candidates despite high scores and keyword post",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "candidates": [],
+        "calls": 2,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.693
+    },
+    {
+      "name": "below_threshold_has_no_rule_fallback",
+      "expected": "zero candidates below threshold",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "candidates": [],
+        "calls": 2,
+        "fallback_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6998
+    },
+    {
+      "name": "missing_usage_is_explicitly_unknown",
+      "expected": "success with usage_reported=false",
+      "status": "PASS",
+      "actual": {
+        "fixture": "local OpenAI-compatible protocol stub; no external model quality evaluated",
+        "usage_reported": false,
+        "status": "COMPLETED"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6995
+    }
+  ]
+}

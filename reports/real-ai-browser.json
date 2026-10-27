@@ -1,0 +1,450 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "half_marathon_paraphrase",
+      "job": {
+        "ai_operations": [
+          {
+            "attempt": 1,
+            "error": "",
+            "input_tokens": 177,
+            "model": "gpt-5.6-luna",
+            "name": "understand-v1",
+            "operation_key": "j_64ed2f08a56c78ba0898a91b:understand-v1:1",
+            "output_tokens": 125,
+            "response_id": "resp_0b5b5e103d45edb2016ae0ed03302881a2b5d08bc0e25ab78a",
+            "status": "SUCCEEDED",
+            "usage_reported": true
+          },
+          {
+            "attempt": 1,
+            "error": "",
+            "input_tokens": 652,
+            "model": "gpt-5.6-luna",
+            "name": "match-v1",
+            "operation_key": "j_64ed2f08a56c78ba0898a91b:match-v1:1",
+            "output_tokens": 351,
+            "response_id": "resp_0255cdcea0d483e5016ae0ed074790819e8256d0f69f7579e5",
+            "status": "SUCCEEDED",
+            "usage_reported": true
+          }
+        ],
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.99,
+            "evidence": [
+              "real_model relevance=0.990",
+              "帖子讨论半程马拉松中的跑步配速、体力分配和后程掉速，与其跑步、运动和马拉松兴趣直接相关",
+              "post: 第一次挑战21.0975公里，后半程掉速严重，怎么分配体力？",
+              "profile: 跑步 健身 运动 马拉松 fitness running"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793125632671,
+        "deadline": 1793125752671,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_9d535cfc130e96c809c35f9e",
+            "interaction_id": "i_c30e14e1e3c6ea1e23feea92",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_02e37950cd9defa057c1884a",
+            "interaction_id": "i_73b31347515b695624f5b627",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "",
+        "id": "j_64ed2f08a56c78ba0898a91b",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_64ed2f08a56c78ba0898a91b:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_64ed2f08a56c78ba0898a91b:comment:fitness:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_40573cab8ec313cb1b230679",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "analysis": {
+                "intent": "寻求半马比赛或训练中的体力分配、配速策略及避免后程掉速的建议。",
+                "summary": "用户第一次挑战半程马拉松（21.0975公里），后半程出现明显掉速，想了解如何更合理地分配体力，以改善全程配速表现。",
+                "topics": [
+                  "半程马拉松",
+                  "跑步配速",
+                  "体力分配",
+                  "后程掉速",
+                  "耐力训练"
+                ]
+              },
+              "engine": "real_model",
+              "input_tokens": 177,
+              "model": "gpt-5.6-luna",
+              "output_tokens": 125,
+              "response_id": "resp_0b5b5e103d45edb2016ae0ed03302881a2b5d08bc0e25ab78a",
+              "scope": "text and supplied captions; raw media not analyzed",
+              "usage_reported": true
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 1,
+              "engine": "real_model",
+              "frozen": true,
+              "model": "gpt-5.6-luna",
+              "profile_count": 5,
+              "response_id": "resp_0255cdcea0d483e5016ae0ed074790819e8256d0f69f7579e5",
+              "scores": [
+                {
+                  "avatar_id": "fitness",
+                  "post_evidence": "第一次挑战21.0975公里，后半程掉速严重，怎么分配体力？",
+                  "profile_evidence": "跑步 健身 运动 马拉松 fitness running",
+                  "reason": "帖子讨论半程马拉松中的跑步配速、体力分配和后程掉速，与其跑步、运动和马拉松兴趣直接相关",
+                  "relevant": true,
+                  "score": 0.99
+                },
+                {
+                  "avatar_id": "travel",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "虽然涉及户外运动，但帖子主题是跑步配速和体力分配，并非徒步、旅行或自然探索",
+                  "relevant": false,
+                  "score": 0.1
+                },
+                {
+                  "avatar_id": "art",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "内容与艺术创作无关",
+                  "relevant": false,
+                  "score": 0
+                },
+                {
+                  "avatar_id": "food",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "内容与烹饪、美食或咖啡无关",
+                  "relevant": false,
+                  "score": 0
+                },
+                {
+                  "avatar_id": "tech",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "内容与编程、AI或开源技术无关",
+                  "relevant": false,
+                  "score": 0
+                }
+              ],
+              "strategy": "full public-profile semantic scoring; no keyword/hash fallback",
+              "threshold": 0.65
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793125642100
+      },
+      "checks": {
+        "completed": true,
+        "only_expected_candidate": true,
+        "real_understand": true,
+        "real_match": true,
+        "two_successful_ai_calls": true,
+        "separate_mock_ledger": true
+      }
+    },
+    {
+      "name": "sourdough_paraphrase",
+      "job": {
+        "ai_operations": [
+          {
+            "attempt": 1,
+            "error": "",
+            "input_tokens": 184,
+            "model": "gpt-5.6-luna",
+            "name": "understand-v1",
+            "operation_key": "j_c2f5d6cb2694665a0b748159:understand-v1:1",
+            "output_tokens": 162,
+            "response_id": "resp_0c5fa1bfeaa2cf61016ae0ed546f3881929fb4515c13b29be7",
+            "status": "SUCCEEDED",
+            "usage_reported": true
+          },
+          {
+            "attempt": 1,
+            "error": "",
+            "input_tokens": 681,
+            "model": "gpt-5.6-luna",
+            "name": "match-v1",
+            "operation_key": "j_c2f5d6cb2694665a0b748159:match-v1:1",
+            "output_tokens": 335,
+            "response_id": "resp_04cab62e9852398f016ae0ed5754608192b50de37b0878b8ab",
+            "status": "SUCCEEDED",
+            "usage_reported": true
+          }
+        ],
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.98,
+            "evidence": [
+              "real_model relevance=0.980",
+              "帖子讨论酸种喂养、面团发酵和面包制作，直接符合其烹饪与面包兴趣",
+              "post: 酸种喂养后一直不起泡，面团揉了很久仍然塌，怎样调整发酵条件？",
+              "profile: 做饭 美食 烹饪 咖啡 面包 food cooking"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于做饭的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793125715702,
+        "deadline": 1793125835702,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_a3cc160fc312a42e94314545",
+            "interaction_id": "i_43bc58bfdbe3b1f37f18d5a1",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_fa5a6cfde6c003a229a0daa3",
+            "interaction_id": "i_85bef16cbc1ae0b337f795b0",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "",
+        "id": "j_c2f5d6cb2694665a0b748159",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_c2f5d6cb2694665a0b748159:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_c2f5d6cb2694665a0b748159:comment:food:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_5b71702241360e0bb2cd49a0",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "analysis": {
+                "intent": "寻求酸种活性不足、面团塌陷及发酵失败的原因分析与温度、时间、喂养比例等调整建议。",
+                "summary": "用户描述酸种喂养后始终不起泡，面团长时间揉制仍然塌陷，想了解应如何调整发酵条件以改善发酵效果。",
+                "topics": [
+                  "酸种活性不足",
+                  "酸种喂养",
+                  "面团塌陷",
+                  "发酵温度",
+                  "发酵时间",
+                  "面包制作故障排查"
+                ]
+              },
+              "engine": "real_model",
+              "input_tokens": 184,
+              "model": "gpt-5.6-luna",
+              "output_tokens": 162,
+              "response_id": "resp_0c5fa1bfeaa2cf61016ae0ed546f3881929fb4515c13b29be7",
+              "scope": "text and supplied captions; raw media not analyzed",
+              "usage_reported": true
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 1,
+              "engine": "real_model",
+              "frozen": true,
+              "model": "gpt-5.6-luna",
+              "profile_count": 5,
+              "response_id": "resp_04cab62e9852398f016ae0ed5754608192b50de37b0878b8ab",
+              "scores": [
+                {
+                  "avatar_id": "food",
+                  "post_evidence": "酸种喂养后一直不起泡，面团揉了很久仍然塌，怎样调整发酵条件？",
+                  "profile_evidence": "做饭 美食 烹饪 咖啡 面包 food cooking",
+                  "reason": "帖子讨论酸种喂养、面团发酵和面包制作，直接符合其烹饪与面包兴趣",
+                  "relevant": true,
+                  "score": 0.98
+                },
+                {
+                  "avatar_id": "art",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "与绘画、音乐、电影和艺术创作无明显关系",
+                  "relevant": false,
+                  "score": 0.02
+                },
+                {
+                  "avatar_id": "fitness",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "与跑步、健身或运动训练无明显关系",
+                  "relevant": false,
+                  "score": 0.02
+                },
+                {
+                  "avatar_id": "tech",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "与编程、AI、开源或技术系统无明显关系",
+                  "relevant": false,
+                  "score": 0.02
+                },
+                {
+                  "avatar_id": "travel",
+                  "post_evidence": "",
+                  "profile_evidence": "",
+                  "reason": "与旅行、徒步、山野、自然或摄影无明显关系",
+                  "relevant": false,
+                  "score": 0.02
+                }
+              ],
+              "strategy": "full public-profile semantic scoring; no keyword/hash fallback",
+              "threshold": 0.65
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793125722438
+      },
+      "checks": {
+        "completed": true,
+        "only_expected_candidate": true,
+        "real_understand": true,
+        "real_match": true,
+        "two_successful_ai_calls": true,
+        "separate_mock_ledger": true
+      }
+    }
+  ],
+  "harness_notes": [
+    "Initial wait used untranslated SUCCEEDED instead of rendered 成功; subsequent snapshot verified COMPLETED. No resubmission."
+  ],
+  "ui": {
+    "real_mode": true,
+    "explicit_simulation_boundary": true,
+    "post_provenance": true,
+    "score_label": true,
+    "separate_ledger_sections": true
+  },
+  "timestamp": "2026-10-27T18:29:15.518Z",
+  "new_posts": 2,
+  "provider_endpoint_recorded": false,
+  "actual_currency_cost": "not calculated"
+}
