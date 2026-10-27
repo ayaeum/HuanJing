@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 	"unicode"
+	"unicode/utf8"
 )
 
 type Candidate struct {
@@ -228,7 +229,7 @@ func (a *App) step(ctx context.Context, j Job) error {
 		if e := a.match(j); e != nil {
 			return e
 		}
-		return a.saveStage(j, "DECIDE", map[string]any{"strategy": "semantic + keyword + opt-in exploration", "max_candidates": j.Max})
+		return a.saveStage(j, "DECIDE", map[string]any{"strategy": "topic-qualified hash similarity + keyword + public history", "max_candidates": j.Max})
 	case "DECIDE":
 		if e := a.decide(ctx, j); e != nil {
 			return e
@@ -347,14 +348,58 @@ func (a *App) call(ctx context.Context, j Job, name, av, result string) (string,
 
 var vocabulary = [][]string{{"旅行", "徒步", "自然", "山", "摄影", "travel", "hiking"}, {"跑步", "健身", "运动", "马拉松", "fitness", "running"}, {"做饭", "美食", "烹饪", "咖啡", "面包", "food", "cooking"}, {"编程", "技术", "ai", "开源", "go", "系统", "programming", "code"}, {"绘画", "音乐", "电影", "艺术", "创作", "music", "art"}}
 
-func topics(s string) []string {
+// topicWord avoids substring matches such as "go" in "going" or "art" in "start".
+func topicWord(s, word string) bool {
 	s = strings.ToLower(s)
+	for offset := 0; offset < len(s); {
+		pos := strings.Index(s[offset:], word)
+		if pos < 0 {
+			return false
+		}
+		pos += offset
+		end := pos + len(word)
+		ascii := word[0] < 128
+		left, right := true, true
+		if ascii && pos > 0 {
+			r, _ := utf8.DecodeLastRuneInString(s[:pos])
+			left = !unicode.IsLetter(r) && !unicode.IsDigit(r)
+		}
+		if ascii && end < len(s) {
+			r, _ := utf8.DecodeRuneInString(s[end:])
+			right = !unicode.IsLetter(r) && !unicode.IsDigit(r)
+		}
+		if left && right {
+			return true
+		}
+		offset = end
+	}
+	return false
+}
+func topics(s string) []string {
 	out := []string{}
 	for _, group := range vocabulary {
 		for _, w := range group {
-			if strings.Contains(s, w) {
+			if topicWord(s, w) {
 				out = append(out, w)
 			}
+		}
+	}
+	return out
+}
+func sharedTopics(text, interests string) []string {
+	out := []string{}
+	for _, group := range vocabulary {
+		contentHits, profileHit := []string{}, false
+		for _, w := range group {
+			if topicWord(text, w) {
+				contentHits = append(contentHits, w)
+			}
+			if topicWord(interests, w) {
+				profileHit = true
+			}
+		}
+		if profileHit {
+			out = append(out, contentHits...)
 		}
 	}
 	return out
@@ -421,11 +466,13 @@ func (a *App) match(j Job) error {
 			return e
 		}
 		it.sem = cosine(embed(text), embed(interest))
-		for _, w := range topics(interest) {
-			if strings.Contains(strings.ToLower(text), w) {
-				it.hits = append(it.hits, w)
-			}
+		it.hits = sharedTopics(text, interest)
+		// Hash similarity and relationship history rank qualified candidates only.
+		// The mock has no semantic model that can justify unrelated interests.
+		if len(it.hits) == 0 {
+			continue
 		}
+
 		it.c.Actions = []string{}
 		it.c.Sources = []string{}
 		it.c.Evidence = []string{}
@@ -481,14 +528,6 @@ func (a *App) match(j Job) error {
 			items[i].c.Evidence = append(items[i].c.Evidence, evidence)
 		}
 	}
-	// One deterministic opt-in exploration slot at most, not an all-avatar fill.
-	for i := range items {
-		if items[i].c.Score == 0 {
-			items[i].c.Score = .1 / 61
-			items[i].c.Evidence = append(items[i].c.Evidence, "exploration rank=1 bounded to one candidate")
-			break
-		}
-	}
 	cs := []Candidate{}
 	for _, it := range items {
 		if it.c.Score > 0 {
@@ -518,7 +557,7 @@ func (a *App) match(j Job) error {
 			return e
 		}
 	}
-	if _, e = tx.Exec(`INSERT OR IGNORE INTO stages(job_id,name,data,created) VALUES(?,'MATCH',?,?)`, j.ID, js(map[string]any{"strategy": "weighted RRF semantic/keyword/public_history + one exploration", "candidate_count": len(cs), "frozen": true}), now()); e != nil {
+	if _, e = tx.Exec(`INSERT OR IGNORE INTO stages(job_id,name,data,created) VALUES(?,'MATCH',?,?)`, j.ID, js(map[string]any{"strategy": "topic-qualified weighted RRF hash similarity/keyword/public_history", "candidate_count": len(cs), "frozen": true}), now()); e != nil {
 		return e
 	}
 	return tx.Commit()
