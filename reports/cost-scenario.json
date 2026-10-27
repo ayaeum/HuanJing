@@ -1,0 +1,38 @@
+{
+  "scope": "Hypothetical steady 24-hour workload; only decision and comment stages. Excludes moderation, understanding, embeddings, media, infrastructure, taxes and discounts. Not actual spend or provider quote.",
+  "parameters": {
+    "posts_per_second": 10,
+    "pass_rate": 0.9,
+    "candidates": 4,
+    "comment_rate": 0.4,
+    "attempts": 1.1,
+    "input_price": 0.5,
+    "output_price": 2.0,
+    "currency": "USD",
+    "output": "reports/cost-scenario.json"
+  },
+  "stages": [
+    {
+      "stage": "decision",
+      "calls_per_second": 39.6,
+      "input_tokens_per_call": 600,
+      "output_tokens_per_call": 200,
+      "mean_call_seconds": 0.8,
+      "mean_inflight": 31.680000000000003,
+      "daily_cost": 2395.008
+    },
+    {
+      "stage": "comment",
+      "calls_per_second": 15.840000000000002,
+      "input_tokens_per_call": 900,
+      "output_tokens_per_call": 300,
+      "mean_call_seconds": 1.5,
+      "mean_inflight": 23.76,
+      "daily_cost": 1437.0048
+    }
+  ],
+  "minimum_rpm": 3326.4,
+  "minimum_tpm": 3041280.0,
+  "daily_cost": 3832.0128,
+  "monthly_30_days_cost": 114960.384
+}

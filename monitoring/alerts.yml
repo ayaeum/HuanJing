@@ -1,0 +1,31 @@
+groups:
+  - name: huanjing-local
+    rules:
+      - alert: HuanJingUnavailable
+        expr: up{job="huanjing"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "HuanJing metrics endpoint is unavailable"
+      - alert: HuanJingOldPendingJobs
+        expr: avatar_oldest_pending_age_seconds > 60
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Pending job age exceeds local demonstration threshold"
+      - alert: HuanJingUnreconciledOutcome
+        expr: avatar_jobs_by_status{status="NEEDS_RECONCILIATION"} > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "A provider outcome requires reconciliation"
+      - alert: HuanJingProjectionBacklog
+        expr: avatar_outbox_pending > 100
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Interaction memory projection is falling behind"

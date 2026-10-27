@@ -1,0 +1,10 @@
+{
+  "passed": 5,
+  "checks": [
+    "idempotency, tenant isolation, public output and unique actions",
+    "SIGKILL and restart with same SQLite database",
+    "delete cancels in-flight job and hides post",
+    "transient failure bounded retry",
+    "unknown receipt reconciles without duplicate effects"
+  ]
+}

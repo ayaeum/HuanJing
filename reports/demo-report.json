@@ -1,0 +1,2145 @@
+{
+  "schema_version": "demo.v1",
+  "mode": "LOCAL_MOCK",
+  "run_id": "a313b549b9",
+  "media_notice": "Image/video are test patterns, audio is a sine tone. Captions supply simulated semantic evidence, not real OCR/ASR/vision.",
+  "parameters": {
+    "base_url": "http://127.0.0.1:8080",
+    "tenant": "demo",
+    "output": "reports/demo-report.json",
+    "timeout": 120
+  },
+  "scenarios": [
+    {
+      "scenario": "text",
+      "fault": "",
+      "job_id": "j_45a758328a702f9a79675dc2",
+      "post_id": "p_89d21ae2f4223f7de1049126",
+      "idempotency_verified": true,
+      "status": "COMPLETED",
+      "job": {
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06505334374186833,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.494",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.03252247488101534,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.538",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.03200204813108039,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.518",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.03125,
+            "evidence": [
+              "semantic rank=4 rrf=0.01562 cosine=0.360",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727149,
+        "deadline": 1793122847149,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_f4a79ebe2811170da2c6b2b0",
+            "interaction_id": "i_e9b4142cb8fe837a3946942d",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_f82c54323cf9013d3e87e5d3",
+            "interaction_id": "i_0a9b35d039e98be601d5add6",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_d32a5b51ddb191c67277be8a",
+            "interaction_id": "i_1b6ec5a80c603112e9a5469f",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_489c25bb41daa524a08cd7d2",
+            "interaction_id": "i_4087851d05819f5dfefbfe4e",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_ddecca6091b989d898578f99",
+            "interaction_id": "i_1da223b6f5611be84ae0c445",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "",
+        "id": "j_45a758328a702f9a79675dc2",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_45a758328a702f9a79675dc2:understand::1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_45a758328a702f9a79675dc2:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_45a758328a702f9a79675dc2:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_45a758328a702f9a79675dc2:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_45a758328a702f9a79675dc2:decision:tech:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_45a758328a702f9a79675dc2:comment:fitness:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_89d21ae2f4223f7de1049126",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 text / a313b549b9",
+              "topics": [
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793122727862
+      },
+      "post": {
+        "attachments": [],
+        "created_at": 1793122727149,
+        "deleted": false,
+        "id": "p_89d21ae2f4223f7de1049126",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122727828,
+            "id": "i_e9b4142cb8fe837a3946942d",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "fitness",
+            "content": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122727860,
+            "id": "i_0a9b35d039e98be601d5add6",
+            "kind": "COMMENT",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122727861,
+            "id": "i_1b6ec5a80c603112e9a5469f",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122727862,
+            "id": "i_4087851d05819f5dfefbfe4e",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122727862,
+            "id": "i_1da223b6f5611be84ae0c445",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          }
+        ],
+        "job_id": "j_45a758328a702f9a79675dc2",
+        "status": "COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 text / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true
+    },
+    {
+      "scenario": "image",
+      "fault": "",
+      "job_id": "j_8a837fc89e36926b16011827",
+      "post_id": "p_85cad4184ae4fb4163bcd7ab",
+      "idempotency_verified": true,
+      "status": "COMPLETED",
+      "job": {
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06557377049180328,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.501",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.03225806451612903,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.497",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.031746031746031744,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.442",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.03125,
+            "evidence": [
+              "semantic rank=4 rrf=0.01562 cosine=0.431",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727158,
+        "deadline": 1793122847158,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_55f3332fd3333bcaa69d39a3",
+            "interaction_id": "i_34022e5ab9bdc5617b5b9cc4",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_d1acccbaaca25f174f5394e8",
+            "interaction_id": "i_9997b467674bc2bdbc04027d",
+            "status": "PENDING"
+          },
+          {
+            "id": "e_c09a679a7c39d940bf1f5ee8",
+            "interaction_id": "i_16409c7d9bbcda51878974da",
+            "status": "PENDING"
+          },
+          {
+            "id": "e_822d8fda8f313e15b19ed960",
+            "interaction_id": "i_b71b20cb5601379912ddf474",
+            "status": "PENDING"
+          },
+          {
+            "id": "e_e6fbe946e035570b1cf7c324",
+            "interaction_id": "i_17b42a499e0b021bbfd6abfa",
+            "status": "PENDING"
+          }
+        ],
+        "fault": "",
+        "id": "j_8a837fc89e36926b16011827",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_8a837fc89e36926b16011827:understand::1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8a837fc89e36926b16011827:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8a837fc89e36926b16011827:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8a837fc89e36926b16011827:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8a837fc89e36926b16011827:decision:tech:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_8a837fc89e36926b16011827:comment:fitness:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_85cad4184ae4fb4163bcd7ab",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 image / a313b549b9\n[MOCK media caption] 模拟跑步配速截图：半马训练经验",
+              "topics": [
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793122727927
+      },
+      "post": {
+        "attachments": [
+          {
+            "caption": "模拟跑步配速截图：半马训练经验",
+            "id": "u_6bdc8e5c346f81579122b2c2",
+            "mime": "image/png",
+            "name": "running.png",
+            "size": 26672,
+            "url": "/api/uploads/u_6bdc8e5c346f81579122b2c2"
+          }
+        ],
+        "created_at": 1793122727158,
+        "deleted": false,
+        "id": "p_85cad4184ae4fb4163bcd7ab",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122727892,
+            "id": "i_34022e5ab9bdc5617b5b9cc4",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "fitness",
+            "content": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122727925,
+            "id": "i_9997b467674bc2bdbc04027d",
+            "kind": "COMMENT",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122727926,
+            "id": "i_b71b20cb5601379912ddf474",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122727926,
+            "id": "i_17b42a499e0b021bbfd6abfa",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122727926,
+            "id": "i_16409c7d9bbcda51878974da",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          }
+        ],
+        "job_id": "j_8a837fc89e36926b16011827",
+        "status": "COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 image / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true
+    },
+    {
+      "scenario": "audio",
+      "fault": "",
+      "job_id": "j_8b32c17578612c6f29ce9f35",
+      "post_id": "p_dcd2057595c4f420ec55d341",
+      "idempotency_verified": true,
+      "status": "COMPLETED",
+      "job": {
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06456494325346784,
+            "evidence": [
+              "semantic rank=5 rrf=0.01538 cosine=0.387",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.03252247488101534,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.462",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.031754032258064516,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.458",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.031746031746031744,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.389",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727164,
+        "deadline": 1793122847164,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_4285530515ab19246bceee5e",
+            "interaction_id": "i_2dab79bdda4a6759f73b24d2",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_f9136c18ab3c0ce891ba7ee7",
+            "interaction_id": "i_33daad1e1ae6485a6049b0ff",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_c21b203f1cfba0cbd3d35b19",
+            "interaction_id": "i_cbd999a26dac42c46176cf40",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_d858b323f79cd057b9e7a60d",
+            "interaction_id": "i_a65742b37ee2681c515cf077",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_c995b21e40f5349a929dafea",
+            "interaction_id": "i_e6bc2a6d741d08b3b22cb184",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "",
+        "id": "j_8b32c17578612c6f29ce9f35",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_8b32c17578612c6f29ce9f35:understand::1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8b32c17578612c6f29ce9f35:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8b32c17578612c6f29ce9f35:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8b32c17578612c6f29ce9f35:decision:tech:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_8b32c17578612c6f29ce9f35:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_8b32c17578612c6f29ce9f35:comment:fitness:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_dcd2057595c4f420ec55d341",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 audio / a313b549b9\n[MOCK media caption] 模拟语音转写：跑步训练如何安排恢复；实际文件为正弦音",
+              "topics": [
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793122727896
+      },
+      "post": {
+        "attachments": [
+          {
+            "caption": "模拟语音转写：跑步训练如何安排恢复；实际文件为正弦音",
+            "id": "u_44b9839fb32e4768ee58f016",
+            "mime": "audio/wave",
+            "name": "training.wav",
+            "size": 176478,
+            "url": "/api/uploads/u_44b9839fb32e4768ee58f016"
+          }
+        ],
+        "created_at": 1793122727164,
+        "deleted": false,
+        "id": "p_dcd2057595c4f420ec55d341",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122727863,
+            "id": "i_2dab79bdda4a6759f73b24d2",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "fitness",
+            "content": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122727893,
+            "id": "i_33daad1e1ae6485a6049b0ff",
+            "kind": "COMMENT",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122727895,
+            "id": "i_a65742b37ee2681c515cf077",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122727895,
+            "id": "i_cbd999a26dac42c46176cf40",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122727896,
+            "id": "i_e6bc2a6d741d08b3b22cb184",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          }
+        ],
+        "job_id": "j_8b32c17578612c6f29ce9f35",
+        "status": "COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 audio / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true
+    },
+    {
+      "scenario": "video",
+      "fault": "",
+      "job_id": "j_e2f977ae306c7f2036c68eb3",
+      "post_id": "p_8a290279b0e32603353ca75c",
+      "idempotency_verified": true,
+      "status": "COMPLETED",
+      "job": {
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06505334374186833,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.469",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.06478053939714437,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.541",
+              "keyword rank=2 rrf=0.03226 matches=旅行",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于旅行的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.031754032258064516,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.482",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.03149801587301587,
+            "evidence": [
+              "semantic rank=4 rrf=0.01562 cosine=0.430",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727175,
+        "deadline": 1793122847175,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_266158f2f8fc425b34320970",
+            "interaction_id": "i_9223d680b34b9c535927c26e",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_4b9217ff01f1285b91c1328c",
+            "interaction_id": "i_bdff70347aaa7508a4e25f87",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_a9a7a7ea565b36b9bfc5fba8",
+            "interaction_id": "i_4217fccad005a38c2e923631",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_7595b3b58803213398ea8a16",
+            "interaction_id": "i_e0ca9b83c7229af47b31e052",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_7285d73af30b978313e488d0",
+            "interaction_id": "i_8421f3a18c902184c720ead9",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_3282da2112a1c7136337f2db",
+            "interaction_id": "i_b78eba2652dce5b0406cb375",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "",
+        "id": "j_e2f977ae306c7f2036c68eb3",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:understand::1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:decision:tech:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:comment:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_e2f977ae306c7f2036c68eb3:comment:travel:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_8a290279b0e32603353ca75c",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 video / a313b549b9\n[MOCK media caption] 模拟户外旅行视频语义；实际文件为动态测试图",
+              "topics": [
+                "旅行",
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793122727895
+      },
+      "post": {
+        "attachments": [
+          {
+            "caption": "模拟户外旅行视频语义；实际文件为动态测试图",
+            "id": "u_ce0511a4bca5a9768b518685",
+            "mime": "video/mp4",
+            "name": "outdoor.mp4",
+            "size": 238670,
+            "url": "/api/uploads/u_ce0511a4bca5a9768b518685"
+          }
+        ],
+        "created_at": 1793122727175,
+        "deleted": false,
+        "id": "p_8a290279b0e32603353ca75c",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122727828,
+            "id": "i_9223d680b34b9c535927c26e",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "fitness",
+            "content": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122727860,
+            "id": "i_bdff70347aaa7508a4e25f87",
+            "kind": "COMMENT",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122727861,
+            "id": "i_4217fccad005a38c2e923631",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "关于旅行的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122727892,
+            "id": "i_e0ca9b83c7229af47b31e052",
+            "kind": "COMMENT",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122727893,
+            "id": "i_8421f3a18c902184c720ead9",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122727894,
+            "id": "i_b78eba2652dce5b0406cb375",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          }
+        ],
+        "job_id": "j_e2f977ae306c7f2036c68eb3",
+        "status": "COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 video / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true
+    },
+    {
+      "scenario": "retry",
+      "fault": "retry_once",
+      "job_id": "j_ee3438e2c7c03b5e74751300",
+      "post_id": "p_3ff79a02f6b264ec236f4e14",
+      "idempotency_verified": true,
+      "status": "COMPLETED",
+      "job": {
+        "attempts": 6,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06557377049180328,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.553",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.03225806451612903,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.533",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.031746031746031744,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.442",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.03125,
+            "evidence": [
+              "semantic rank=4 rrf=0.01562 cosine=0.421",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727177,
+        "deadline": 1793122847177,
+        "epoch": 6,
+        "error": "",
+        "events": [
+          {
+            "id": "e_fe714029fcc91580481f8ca9",
+            "interaction_id": "i_66703f85d98b7207fe34aa2a",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_2ed1a9597696895f2375f570",
+            "interaction_id": "i_9e874c5730b02190a6be322a",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_fda825767c7e95f137210ad1",
+            "interaction_id": "i_ba15efd90cf903f356f50892",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_a9bc0ffd7b4d17107bd5f32f",
+            "interaction_id": "i_66ae7c6ae9dba33b4d02167b",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_3b38a18dfaae33354951e300",
+            "interaction_id": "i_1a3943ca4516a816ccfe22e0",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "retry_once",
+        "id": "j_ee3438e2c7c03b5e74751300",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "simulated transient provider 503",
+            "name": "understand",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:understand::1",
+            "status": "FAILED"
+          },
+          {
+            "attempt": 2,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:understand::2",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:decision:tech:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_ee3438e2c7c03b5e74751300:comment:fitness:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_3ff79a02f6b264ec236f4e14",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 retry / a313b549b9",
+              "topics": [
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793122728406
+      },
+      "post": {
+        "attachments": [],
+        "created_at": 1793122727177,
+        "deleted": false,
+        "id": "p_3ff79a02f6b264ec236f4e14",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122728373,
+            "id": "i_66703f85d98b7207fe34aa2a",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "fitness",
+            "content": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122728404,
+            "id": "i_9e874c5730b02190a6be322a",
+            "kind": "COMMENT",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122728404,
+            "id": "i_ba15efd90cf903f356f50892",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122728406,
+            "id": "i_66ae7c6ae9dba33b4d02167b",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122728406,
+            "id": "i_1a3943ca4516a816ccfe22e0",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          }
+        ],
+        "job_id": "j_ee3438e2c7c03b5e74751300",
+        "status": "COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 retry / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true
+    },
+    {
+      "scenario": "unknown",
+      "fault": "unknown_once",
+      "job_id": "j_10a1f85163af8804d901e506",
+      "post_id": "p_ee9ab12763b01beae5c21168",
+      "idempotency_verified": true,
+      "status": "COMPLETED",
+      "reconciled": true,
+      "reconcile_response": {
+        "status": "ACCEPTED"
+      },
+      "job": {
+        "attempts": 6,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06530936012691697,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.482",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "COMPLETED",
+            "reason": "SHARED_INTEREST",
+            "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "action_states": {
+              "COMMENT": "SUCCEEDED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.03252247488101534,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.549",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.031746031746031744,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.481",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.03125,
+            "evidence": [
+              "semantic rank=4 rrf=0.01562 cosine=0.475",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727179,
+        "deadline": 1793122847987,
+        "epoch": 7,
+        "error": "",
+        "events": [
+          {
+            "id": "e_51a6ac98a662d58eb9c3e57e",
+            "interaction_id": "i_9eb9bbde294667f7237cd290",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_e235597633b071b8aca1bca6",
+            "interaction_id": "i_106d6add9b4319765cbfd47a",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_23f80a1a8a57ad9408cbf75d",
+            "interaction_id": "i_3eba15bcb05136ec979c1941",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_21b83998751c544c613dfccd",
+            "interaction_id": "i_d979c6d25d3cc338a27f21ec",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_d2053788bb902bc070335914",
+            "interaction_id": "i_73e910c9777b0aeeb8ad2d1f",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "unknown_once",
+        "id": "j_10a1f85163af8804d901e506",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_10a1f85163af8804d901e506:understand::1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_10a1f85163af8804d901e506:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_10a1f85163af8804d901e506:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_10a1f85163af8804d901e506:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_10a1f85163af8804d901e506:decision:tech:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "comment",
+            "operation_key": "j_10a1f85163af8804d901e506:comment:fitness:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_ee9ab12763b01beae5c21168",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 unknown / a313b549b9",
+              "topics": [
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "COMPLETED",
+        "updated_at": 1793122728010
+      },
+      "post": {
+        "attachments": [],
+        "created_at": 1793122727179,
+        "deleted": false,
+        "id": "p_ee9ab12763b01beae5c21168",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122727894,
+            "id": "i_9eb9bbde294667f7237cd290",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "fitness",
+            "content": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+            "created_at": 1793122728008,
+            "id": "i_106d6add9b4319765cbfd47a",
+            "kind": "COMMENT",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122728009,
+            "id": "i_d979c6d25d3cc338a27f21ec",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122728009,
+            "id": "i_3eba15bcb05136ec979c1941",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122728010,
+            "id": "i_73e910c9777b0aeeb8ad2d1f",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          }
+        ],
+        "job_id": "j_10a1f85163af8804d901e506",
+        "status": "COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 unknown / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true,
+      "unknown_recovery_verified": true
+    },
+    {
+      "scenario": "comment_rejected",
+      "fault": "comment_reject",
+      "job_id": "j_360d2e7621c185d30a000e6a",
+      "post_id": "p_de420fbbb135f1a13c24a6bb",
+      "idempotency_verified": true,
+      "status": "PARTIAL_COMPLETED",
+      "job": {
+        "attempts": 5,
+        "candidates": [
+          {
+            "avatar_id": "fitness",
+            "name": "运动搭子",
+            "score": 0.06505334374186833,
+            "evidence": [
+              "semantic rank=3 rrf=0.01587 cosine=0.501",
+              "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+              "public_history rank=1 rrf=0.01639"
+            ],
+            "actions": [
+              "LIKE",
+              "COMMENT"
+            ],
+            "status": "PARTIAL",
+            "reason": "SHARED_INTEREST",
+            "comment": "",
+            "action_states": {
+              "COMMENT": "REJECTED",
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "food",
+            "name": "厨房朋友",
+            "score": 0.032266458495966696,
+            "evidence": [
+              "semantic rank=1 rrf=0.01639 cosine=0.512",
+              "public_history rank=3 rrf=0.01587"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "travel",
+            "name": "山野旅行家",
+            "score": 0.03225806451612903,
+            "evidence": [
+              "semantic rank=2 rrf=0.01613 cosine=0.504",
+              "public_history rank=2 rrf=0.01613"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          },
+          {
+            "avatar_id": "tech",
+            "name": "技术同伴",
+            "score": 0.03125,
+            "evidence": [
+              "semantic rank=4 rrf=0.01562 cosine=0.455",
+              "public_history rank=4 rrf=0.01562"
+            ],
+            "actions": [
+              "LIKE"
+            ],
+            "status": "COMPLETED",
+            "reason": "PERSONA_CONTEXT_FIT",
+            "comment": "",
+            "action_states": {
+              "LIKE": "SUCCEEDED"
+            }
+          }
+        ],
+        "created_at": 1793122727180,
+        "deadline": 1793122847180,
+        "epoch": 5,
+        "error": "",
+        "events": [
+          {
+            "id": "e_8dbe30d87f5bbcd4b5e1f63e",
+            "interaction_id": "i_f284824154ad5e874304e4dc",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_2e2d1010befc5417a50e198f",
+            "interaction_id": "i_421c04e50b1a1f8940fbbc6f",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_7c96a394448e25494b801a36",
+            "interaction_id": "i_ec2a71131004b0888b6d7a0a",
+            "status": "DELIVERED"
+          },
+          {
+            "id": "e_844c4574dad01de8e8518277",
+            "interaction_id": "i_f85544a3caf89fd2af60d26a",
+            "status": "DELIVERED"
+          }
+        ],
+        "fault": "comment_reject",
+        "id": "j_360d2e7621c185d30a000e6a",
+        "max_candidates": 4,
+        "next_run": 0,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "",
+            "name": "understand",
+            "operation_key": "j_360d2e7621c185d30a000e6a:understand::1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "fitness",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_360d2e7621c185d30a000e6a:decision:fitness:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "food",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_360d2e7621c185d30a000e6a:decision:food:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "travel",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_360d2e7621c185d30a000e6a:decision:travel:1",
+            "status": "SUCCEEDED"
+          },
+          {
+            "attempt": 1,
+            "avatar_id": "tech",
+            "cost": 1,
+            "error": "",
+            "name": "decision",
+            "operation_key": "j_360d2e7621c185d30a000e6a:decision:tech:1",
+            "status": "SUCCEEDED"
+          }
+        ],
+        "post_id": "p_de420fbbb135f1a13c24a6bb",
+        "stage": "DONE",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "UNDERSTAND",
+            "output": {
+              "embedding": "hash-bigram-64-v1",
+              "model": "mock-v1",
+              "summary": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 comment_rejected / a313b549b9",
+              "topics": [
+                "跑步",
+                "马拉松"
+              ]
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "MATCH",
+            "output": {
+              "candidate_count": 4,
+              "frozen": true,
+              "strategy": "weighted RRF semantic/keyword/public_history + one exploration"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "DECIDE",
+            "output": {
+              "plan": "LIKE and COMMENT frozen independently",
+              "private_context": "used only inside decision; never copied into public generation"
+            },
+            "status": "SUCCEEDED"
+          },
+          {
+            "name": "PUBLISH",
+            "output": {
+              "actions": "independently idempotent",
+              "publisher": "local SQL transaction"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "PARTIAL_COMPLETED",
+        "updated_at": 1793122727898
+      },
+      "post": {
+        "attachments": [],
+        "created_at": 1793122727180,
+        "deleted": false,
+        "id": "p_de420fbbb135f1a13c24a6bb",
+        "interactions": [
+          {
+            "avatar_id": "fitness",
+            "content": "",
+            "created_at": 1793122727896,
+            "id": "i_f284824154ad5e874304e4dc",
+            "kind": "LIKE",
+            "name": "运动搭子"
+          },
+          {
+            "avatar_id": "food",
+            "content": "",
+            "created_at": 1793122727897,
+            "id": "i_421c04e50b1a1f8940fbbc6f",
+            "kind": "LIKE",
+            "name": "厨房朋友"
+          },
+          {
+            "avatar_id": "travel",
+            "content": "",
+            "created_at": 1793122727897,
+            "id": "i_ec2a71131004b0888b6d7a0a",
+            "kind": "LIKE",
+            "name": "山野旅行家"
+          },
+          {
+            "avatar_id": "tech",
+            "content": "",
+            "created_at": 1793122727898,
+            "id": "i_f85544a3caf89fd2af60d26a",
+            "kind": "LIKE",
+            "name": "技术同伴"
+          }
+        ],
+        "job_id": "j_360d2e7621c185d30a000e6a",
+        "status": "PARTIAL_COMPLETED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 comment_rejected / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true,
+      "nonempty_candidates_verified": true,
+      "unique_actions_verified": true
+    },
+    {
+      "scenario": "dependency_failure",
+      "fault": "always_fail",
+      "job_id": "j_83b70d52618a273b7e21bfa6",
+      "post_id": "p_6d7e9bc36f73c7d18f13b112",
+      "idempotency_verified": true,
+      "status": "FAILED",
+      "job": {
+        "attempts": 4,
+        "candidates": [],
+        "created_at": 1793122727182,
+        "deadline": 1793122847182,
+        "epoch": 4,
+        "error": "simulated transient provider 503",
+        "events": [],
+        "fault": "always_fail",
+        "id": "j_83b70d52618a273b7e21bfa6",
+        "max_candidates": 4,
+        "next_run": 1793122731799,
+        "operations": [
+          {
+            "attempt": 1,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "simulated transient provider 503",
+            "name": "understand",
+            "operation_key": "j_83b70d52618a273b7e21bfa6:understand::1",
+            "status": "FAILED"
+          },
+          {
+            "attempt": 2,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "simulated transient provider 503",
+            "name": "understand",
+            "operation_key": "j_83b70d52618a273b7e21bfa6:understand::2",
+            "status": "FAILED"
+          },
+          {
+            "attempt": 3,
+            "avatar_id": "",
+            "cost": 1,
+            "error": "simulated transient provider 503",
+            "name": "understand",
+            "operation_key": "j_83b70d52618a273b7e21bfa6:understand::3",
+            "status": "FAILED"
+          }
+        ],
+        "post_id": "p_6d7e9bc36f73c7d18f13b112",
+        "stage": "UNDERSTAND",
+        "stages": [
+          {
+            "name": "MODERATE",
+            "output": {
+              "engine": "deterministic_mock",
+              "scope": "text and supplied captions only; not real media moderation",
+              "verdict": "PASS"
+            },
+            "status": "SUCCEEDED"
+          }
+        ],
+        "status": "FAILED",
+        "updated_at": 1793122729399
+      },
+      "post": {
+        "attachments": [],
+        "created_at": 1793122727182,
+        "deleted": false,
+        "id": "p_6d7e9bc36f73c7d18f13b112",
+        "interactions": [],
+        "job_id": "j_83b70d52618a273b7e21bfa6",
+        "status": "FAILED",
+        "text": "第一次参加半程马拉松跑步，想请教配速训练与恢复。演示 dependency_failure / a313b549b9",
+        "version": 1
+      },
+      "expected_status_verified": true
+    }
+  ]
+}

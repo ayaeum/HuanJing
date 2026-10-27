@@ -1,0 +1,13 @@
+services:
+  huanjing:
+    build: .
+    ports:
+      - "127.0.0.1:${PORT:-8080}:8080"
+    environment:
+      WORKERS: "4"
+    volumes:
+      - huanjing-data:/app/data
+    restart: unless-stopped
+    stop_grace_period: 15s
+volumes:
+  huanjing-data:

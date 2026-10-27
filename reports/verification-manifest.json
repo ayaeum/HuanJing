@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-10-27T17:42:40.033464+00:00",
+  "backend_commit": "da8d76cb6d67ed3e50358e9ef7ab1592ee25a121",
+  "source_sha256": {
+    "internal/app/app_test.go": "909cb91f5113797c997f01e74038b0d7b24eccec957d2f6843818d684fe91958",
+    "internal/app/worker.go": "3c59c6178036b54e9adaec798b310e935c981a5d0a025a1bf925d114e8c7cf73",
+    "internal/app/store.go": "1032b05791b621fa1bcfdebe0b1f2273ef7d2901a4c088f9a95b3303c060e3f0",
+    "internal/app/http.go": "22d609a6bac1bda80ae87f0daedf08fabff2e4424e7d524d1d8643ebea9a5d55",
+    "internal/app/lifecycle.go": "e7290e89406af5c92303cf3b869066f602b03f1bd1649ff578a1f581bbbeb840",
+    "cmd/server/main.go": "a6d6aa2edc5ff14af8f9bb43e9f6f1e20b25e9279e815b96c04f2bfc94653a7d",
+    "go.mod": "23f154e456162f4cc16510f9c92a8a84ee9fde126d5f670e2b1d47133673a175",
+    "go.sum": "477e088b06db1ab640adcf7b7fdc763117d5178e934a44ce249dc2b01eef3a5c"
+  },
+  "binary_sha256": "68c0aaf23ae4525e1b1ad64763b759be0ae2e1e1e03e71223274507d2f1152bb",
+  "go_version": "go version go1.26.6 darwin/arm64",
+  "checks": [
+    "go test -race ./... -count=1",
+    "go vet ./...",
+    "scripts/acceptance.py",
+    "scripts/demo.py on host and Docker",
+    "100/c8 and 200/c32 lifecycle load",
+    "Docker Compose restart retains DB and media"
+  ]
+}

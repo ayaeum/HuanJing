@@ -1,0 +1,45 @@
+{
+  "compose": "huanjing-verification",
+  "restart_preserves_posts_jobs_interactions": true,
+  "restart_preserves_uploaded_media": true,
+  "before": {
+    "active_workers": 0,
+    "budget": {
+      "limit": 10000,
+      "reserved": 0,
+      "spent": 46
+    },
+    "interactions": 35,
+    "jobs": 8,
+    "mode": "LOCAL_MOCK",
+    "outbox_done": 35,
+    "outbox_pending": 0,
+    "posts": 8,
+    "queue_depth": 0,
+    "statuses": {
+      "COMPLETED": 6,
+      "FAILED": 1,
+      "PARTIAL_COMPLETED": 1
+    }
+  },
+  "after": {
+    "active_workers": 0,
+    "budget": {
+      "limit": 10000,
+      "reserved": 0,
+      "spent": 46
+    },
+    "interactions": 35,
+    "jobs": 8,
+    "mode": "LOCAL_MOCK",
+    "outbox_done": 35,
+    "outbox_pending": 0,
+    "posts": 8,
+    "queue_depth": 0,
+    "statuses": {
+      "COMPLETED": 6,
+      "FAILED": 1,
+      "PARTIAL_COMPLETED": 1
+    }
+  }
+}

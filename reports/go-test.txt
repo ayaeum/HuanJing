@@ -1,0 +1,2 @@
+?   	github.com/ayaeum/HuanJing/cmd/server	[no test files]
+ok  	github.com/ayaeum/HuanJing/internal/app	5.429s

@@ -1,0 +1,36 @@
+# TYPE avatar_outbox_pending gauge
+avatar_outbox_pending 0
+# TYPE avatar_oldest_pending_age_seconds gauge
+avatar_oldest_pending_age_seconds 0
+# TYPE avatar_server_time_seconds gauge
+avatar_server_time_seconds 1793122959
+# TYPE avatar_posts_total gauge
+avatar_posts_total 17
+# TYPE avatar_interactions_total gauge
+avatar_interactions_total 75
+# TYPE avatar_outbox_total gauge
+avatar_outbox_total 75
+# TYPE avatar_budget_reserved_units gauge
+avatar_budget_reserved_units 0
+# TYPE avatar_budget_spent_units gauge
+avatar_budget_spent_units 98
+# TYPE avatar_active_workers gauge
+avatar_active_workers 0
+# TYPE avatar_jobs_total gauge
+avatar_jobs_total 17
+# TYPE avatar_operations_total gauge
+avatar_operations_total 98
+# TYPE avatar_queue_depth gauge
+avatar_queue_depth 0
+# TYPE avatar_jobs_by_status gauge
+avatar_jobs_by_status{status="ACCEPTED"} 0
+avatar_jobs_by_status{status="PROCESSING"} 0
+avatar_jobs_by_status{status="WAITING_DEPENDENCY"} 0
+avatar_jobs_by_status{status="NEEDS_RECONCILIATION"} 0
+avatar_jobs_by_status{status="COMPLETED"} 13
+avatar_jobs_by_status{status="PARTIAL_COMPLETED"} 2
+avatar_jobs_by_status{status="REJECTED"} 0
+avatar_jobs_by_status{status="FAILED"} 2
+avatar_jobs_by_status{status="CANCELLED"} 0
+avatar_jobs_by_status{status="EXPIRED"} 0
+avatar_jobs_by_status{status="SUPERSEDED"} 0
