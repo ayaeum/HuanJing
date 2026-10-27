@@ -3,6 +3,7 @@ package app
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 func (a *App) editPost(w http.ResponseWriter, r *http.Request) {
@@ -14,6 +15,7 @@ func (a *App) editPost(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &b) {
 		return
 	}
+	b.Text = strings.TrimSpace(b.Text)
 	if b.Expected < 1 || len(b.Text) > 16000 || len(b.Attachments) > 4 || (b.Text == "" && len(b.Attachments) == 0) {
 		bad(w, 400, "expected_version and content required")
 		return

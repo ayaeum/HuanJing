@@ -215,6 +215,18 @@ func (a *App) uploadGet(w http.ResponseWriter, r *http.Request) {
 		bad(w, 404, "upload not found")
 		return
 	}
+	// Unattached uploads remain previewable. Once attached, access requires a
+	// live parent; shared attachments survive deletion of just one parent.
+	var parents, live int
+	if err := a.DB.QueryRow(`SELECT COUNT(*),COALESCE(SUM(CASE WHEN p.deleted=0 AND EXISTS(SELECT 1 FROM json_each(p.attachments) a WHERE a.value=b.upload_id) THEN 1 ELSE 0 END),0) FROM upload_bindings b JOIN posts p ON p.id=b.post_id AND p.tenant=b.tenant WHERE b.tenant=? AND b.upload_id=?`, tenant(r), r.PathValue("id")).Scan(&parents, &live); err != nil {
+		bad(w, 500, err.Error())
+		return
+	}
+	if parents > 0 && live == 0 {
+		bad(w, 410, "attachment parent deleted")
+		return
+	}
+	w.Header().Set("Cache-Control", "no-store")
 	w.Header().Set("Content-Type", mt)
 	w.Header().Set("Content-Disposition", mime.FormatMediaType("inline", map[string]string{"filename": name}))
 	http.ServeFile(w, r, path)

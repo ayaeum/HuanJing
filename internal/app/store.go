@@ -63,6 +63,12 @@ func Open(path string, workers int) (*App, error) {
  CREATE TABLE IF NOT EXISTS interactions(id TEXT PRIMARY KEY,tenant TEXT,post_id TEXT,avatar_id TEXT,kind TEXT,content TEXT,created INTEGER,UNIQUE(tenant,post_id,avatar_id,kind));
  CREATE TABLE IF NOT EXISTS outbox(id TEXT PRIMARY KEY,tenant TEXT,post_id TEXT,interaction_id TEXT,avatar_id TEXT,content TEXT,status TEXT DEFAULT 'PENDING',created INTEGER);
  CREATE TABLE IF NOT EXISTS uploads(id TEXT PRIMARY KEY,tenant TEXT,name TEXT,mime TEXT,size INTEGER,caption TEXT,path TEXT,created INTEGER);
+ CREATE TABLE IF NOT EXISTS upload_bindings(tenant TEXT,upload_id TEXT,post_id TEXT,PRIMARY KEY(tenant,upload_id,post_id));
+ INSERT OR IGNORE INTO upload_bindings SELECT p.tenant,a.value,p.id FROM posts p,json_each(p.attachments) a;
+ CREATE TRIGGER IF NOT EXISTS post_upload_insert AFTER INSERT ON posts BEGIN
+ INSERT OR IGNORE INTO upload_bindings SELECT NEW.tenant,value,NEW.id FROM json_each(NEW.attachments); END;
+ CREATE TRIGGER IF NOT EXISTS post_upload_update AFTER UPDATE OF attachments ON posts BEGIN
+ INSERT OR IGNORE INTO upload_bindings SELECT NEW.tenant,value,NEW.id FROM json_each(NEW.attachments); END;
  `)
 	if err != nil {
 		db.Close()
