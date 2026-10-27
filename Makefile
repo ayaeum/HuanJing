@@ -11,3 +11,8 @@ load:
 	python3 scripts/loadtest.py --help
 clean:
 	rm -rf bin
+
+.PHONY: test-e2e
+test-e2e: build
+	E2E_BINARY=$(CURDIR)/bin/huanjing python3 scripts/e2e_contract.py
+	E2E_BINARY=$(CURDIR)/bin/huanjing python3 scripts/e2e_lifecycle.py

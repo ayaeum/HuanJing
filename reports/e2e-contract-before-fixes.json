@@ -1,0 +1,547 @@
+{
+  "suite": "http-contract",
+  "started_at_utc": "2026-10-27T17:50:02.158382+00:00",
+  "finished_at_utc": "2026-10-27T17:50:13.045837+00:00",
+  "scope": "HTTP-only black-box; isolated SQLite state and random localhost port per case; deterministic MOCK providers",
+  "binary_sha256": "2af1113895f53999c9ba203c69f3a06837018aea5a436fdc40ec33cc75871781",
+  "cases_total": 40,
+  "passed": 38,
+  "failed": 2,
+  "elapsed_seconds": 10.8852,
+  "cases": [
+    {
+      "name": "health_mock_mode",
+      "expected": "200 and LOCAL_MOCK mode",
+      "status": "PASS",
+      "actual": {
+        "mode": "LOCAL_MOCK",
+        "status": "ok"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.7289
+    },
+    {
+      "name": "missing_idempotency_key",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "Idempotency-Key required, max 128 bytes"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0488
+    },
+    {
+      "name": "empty_content",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "text or attachment required, max text 16000 bytes and 4 attachments"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0478
+    },
+    {
+      "name": "unknown_json_field",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "json: unknown field \"invented\""
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.051
+    },
+    {
+      "name": "multiple_json_values",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "one JSON value required"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.059
+    },
+    {
+      "name": "text_size_limit",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "text or attachment required, max text 16000 bytes and 4 attachments"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0781
+    },
+    {
+      "name": "candidate_lower_limit",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "max_candidates 1..5"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.1189
+    },
+    {
+      "name": "candidate_upper_limit",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "max_candidates 1..5"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.1468
+    },
+    {
+      "name": "deadline_lower_limit",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "deadline_seconds 2..600"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.4467
+    },
+    {
+      "name": "deadline_upper_limit",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "deadline_seconds 2..600"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.2997
+    },
+    {
+      "name": "unknown_fault",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "invalid fault"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.388
+    },
+    {
+      "name": "attachment_count_limit",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "text or attachment required, max text 16000 bytes and 4 attachments"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.3835
+    },
+    {
+      "name": "unknown_attachment",
+      "expected": "400; zero posts/jobs",
+      "status": "PASS",
+      "actual": {
+        "response": {
+          "error": "unknown or unauthorized attachment"
+        },
+        "posts": 0,
+        "jobs": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.4219
+    },
+    {
+      "name": "sequential_idempotency_conflict",
+      "expected": "one durable identity; changed body 409",
+      "status": "PASS",
+      "actual": {
+        "job_id": "j_c27bceb2d730e9a97a3d297f",
+        "durable_jobs": 1
+      },
+      "failure": null,
+      "elapsed_seconds": 0.3224
+    },
+    {
+      "name": "concurrent_idempotency",
+      "expected": "12 callers share one job; unique actions",
+      "status": "PASS",
+      "actual": {
+        "requests": 12,
+        "jobs": 1,
+        "unique_actions": 2
+      },
+      "failure": null,
+      "elapsed_seconds": 0.6653
+    },
+    {
+      "name": "concurrent_different_input_same_key",
+      "expected": "6 accepted and 6 conflicts; one winning identity",
+      "status": "PASS",
+      "actual": {
+        "accepted": 6,
+        "conflicts": 6
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0527
+    },
+    {
+      "name": "tenant_idempotency_namespace",
+      "expected": "same key in two tenants creates distinct identities",
+      "status": "PASS",
+      "actual": {
+        "distinct_posts": true,
+        "distinct_jobs": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0467
+    },
+    {
+      "name": "cross_tenant_post_read",
+      "expected": "404; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_status": 404,
+        "owner_unchanged": true,
+        "response": {
+          "error": "post not found"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0572
+    },
+    {
+      "name": "cross_tenant_job_read",
+      "expected": "404; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_status": 404,
+        "owner_unchanged": true,
+        "response": {
+          "error": "job not found"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0461
+    },
+    {
+      "name": "cross_tenant_post_edit",
+      "expected": "404; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_status": 404,
+        "owner_unchanged": true,
+        "response": {
+          "error": "post not found"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0462
+    },
+    {
+      "name": "cross_tenant_post_delete",
+      "expected": "404; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_status": 404,
+        "owner_unchanged": true,
+        "response": {
+          "error": "post not found"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.049
+    },
+    {
+      "name": "cross_tenant_job_retry",
+      "expected": "409; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_status": 409,
+        "owner_unchanged": true,
+        "response": {
+          "error": "only failed or expired active posts can retry; unknown requires reconciliation"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0499
+    },
+    {
+      "name": "cross_tenant_job_reconcile",
+      "expected": "404; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_status": 404,
+        "owner_unchanged": true,
+        "response": {
+          "error": "job not found"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.046
+    },
+    {
+      "name": "cross_tenant_lists_stats",
+      "expected": "no owner posts/jobs/interactions in other tenant",
+      "status": "PASS",
+      "actual": {
+        "foreign_posts": 0,
+        "foreign_jobs": 0,
+        "foreign_interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5022
+    },
+    {
+      "name": "cross_tenant_avatar_patch",
+      "expected": "mutation affects only caller tenant",
+      "status": "PASS",
+      "actual": {
+        "owner_active": true,
+        "other_active": false
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0495
+    },
+    {
+      "name": "cross_tenant_memories",
+      "expected": "foreign delete 404; list scoped; owner preserved",
+      "status": "PASS",
+      "actual": {
+        "foreign_memory_count": 10,
+        "owner_memory_preserved": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0877
+    },
+    {
+      "name": "cross_tenant_budget",
+      "expected": "mutation affects only caller tenant budget",
+      "status": "PASS",
+      "actual": {
+        "owner_budget": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 0
+        },
+        "other_budget": {
+          "limit": 7,
+          "reserved": 0,
+          "spent": 0
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0481
+    },
+    {
+      "name": "upload_magic_rejects_mislabel",
+      "expected": "text labeled PNG rejected 415",
+      "status": "PASS",
+      "actual": {
+        "status": 415,
+        "response": {
+          "error": "supported media signatures: image, audio, video; unknown binary rejected"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0471
+    },
+    {
+      "name": "upload_magic_overrides_extension",
+      "expected": "real PNG named txt accepted as image/png",
+      "status": "PASS",
+      "actual": {
+        "status": 201,
+        "detected_mime": "image/png"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0533
+    },
+    {
+      "name": "upload_size_limit",
+      "expected": "over 20 MiB rejected 400/413",
+      "status": "PASS",
+      "actual": {
+        "status": 413,
+        "bytes_sent": 20998193,
+        "response": {
+          "error": "maximum file size 20 MiB"
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.1695
+    },
+    {
+      "name": "cross_tenant_upload_read_and_attach",
+      "expected": "foreign read 404/attach 400; owner read 200",
+      "status": "PASS",
+      "actual": {
+        "owner_get": 200,
+        "foreign_get": 404,
+        "foreign_attach": 400
+      },
+      "failure": null,
+      "elapsed_seconds": 0.0528
+    },
+    {
+      "name": "media_without_caption",
+      "expected": "job REJECTED and zero interactions",
+      "status": "PASS",
+      "actual": {
+        "job_status": "REJECTED",
+        "interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.1732
+    },
+    {
+      "name": "media_with_caption",
+      "expected": "caption-mock job COMPLETED with interactions",
+      "status": "PASS",
+      "actual": {
+        "job_status": "COMPLETED",
+        "interactions": 2,
+        "perception": "caption_mock"
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5002
+    },
+    {
+      "name": "private_canary_never_in_public_api",
+      "expected": "no private canary in eight public outputs",
+      "status": "PASS",
+      "actual": {
+        "checked_endpoints": [
+          "/api/avatars",
+          "/api/memories",
+          "/api/posts",
+          "/api/posts/p_f55b43f915a3fb752630265c",
+          "/api/jobs",
+          "/api/jobs/j_3a6efa88a4163288f7d69bcc",
+          "/api/stats",
+          "/metrics"
+        ],
+        "canary_exposure": false
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5307
+    },
+    {
+      "name": "queue_budget_outbox_accounting",
+      "expected": "four jobs settled; costs/actions/events reconcile",
+      "status": "PASS",
+      "actual": {
+        "posts": 4,
+        "spent": 12,
+        "reserved": 0,
+        "interactions": 8,
+        "outbox_pending": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 0.5572
+    },
+    {
+      "name": "zero_budget_no_spend",
+      "expected": "FAILED; no spend/reservation/interactions or pending queue",
+      "status": "PASS",
+      "actual": {
+        "job_status": "FAILED",
+        "budget": {
+          "limit": 0,
+          "reserved": 0,
+          "spent": 0
+        },
+        "interactions": 0
+      },
+      "failure": null,
+      "elapsed_seconds": 2.0684
+    },
+    {
+      "name": "budget_cannot_drop_below_spend",
+      "expected": "409 and prior budget unchanged",
+      "status": "PASS",
+      "actual": {
+        "budget_preserved": {
+          "limit": 10000,
+          "reserved": 0,
+          "spent": 3
+        }
+      },
+      "failure": null,
+      "elapsed_seconds": 0.507
+    },
+    {
+      "name": "edit_whitespace_is_empty_content",
+      "expected": "400 and original version/content unchanged",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "(\"PATCH /api/posts/p_682435935374a3ad744c6853: expected 400, actual 202: {'job_id': 'j_cc29da19de00a915175e681f', 'post_id': 'p_682435935374a3ad744c6853', 'status': 'ACCEPTED', 'version': 2}\", 'server log tail: 2026/10/28 01:50:12 LOCAL_MOCK listening on 127.0.0.1:61929; deterministic captions, no real AI moderation\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 213, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 352, in run\n    return fn(s)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 264, in case_edit_whitespace\n    expect(s, 'PATCH', '/api/posts/' + obj['post_id'], 400,\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 22, in expect\n    check(actual == status, f'{method} {path}: expected {status}, actual {actual}: {body}')\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 17, in check\n    raise AssertionError(message)\nAssertionError: (\"PATCH /api/posts/p_682435935374a3ad744c6853: expected 400, actual 202: {'job_id': 'j_cc29da19de00a915175e681f', 'post_id': 'p_682435935374a3ad744c6853', 'status': 'ACCEPTED', 'version': 2}\", 'server log tail: 2026/10/28 01:50:12 LOCAL_MOCK listening on 127.0.0.1:61929; deterministic captions, no real AI moderation\\n')\n"
+      },
+      "elapsed_seconds": 0.0499
+    },
+    {
+      "name": "deleted_post_job_privacy",
+      "expected": "post 410, list hidden, job sensitive outputs empty",
+      "status": "PASS",
+      "actual": {
+        "post_status": 410,
+        "list_hidden": true,
+        "job_content_redacted": true
+      },
+      "failure": null,
+      "elapsed_seconds": 0.4087
+    },
+    {
+      "name": "deleted_attachment_privacy",
+      "expected": "sole-parent deleted attachment inaccessible (404/410)",
+      "status": "FAIL",
+      "actual": "Case did not satisfy its assertions",
+      "failure": {
+        "type": "AssertionError",
+        "message": "('deleted sole-parent attachment remained readable: HTTP 200', 'server log tail: 2026/10/28 01:50:12 LOCAL_MOCK listening on 127.0.0.1:61955; deterministic captions, no real AI moderation\\n')",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_support.py\", line 213, in run\n    actual = fn()\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 352, in run\n    return fn(s)\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 292, in case_deleted_attachment_privacy\n    check(code in (404, 410), f'deleted sole-parent attachment remained readable: HTTP {code}')\n  File \"/Users/bytedance/Documents/Codex/2026-10-28/multimodal-post-matching/system/scripts/e2e_contract.py\", line 17, in check\n    raise AssertionError(message)\nAssertionError: ('deleted sole-parent attachment remained readable: HTTP 200', 'server log tail: 2026/10/28 01:50:12 LOCAL_MOCK listening on 127.0.0.1:61955; deterministic captions, no real AI moderation\\n')\n"
+      },
+      "elapsed_seconds": 0.4791
+    }
+  ]
+}

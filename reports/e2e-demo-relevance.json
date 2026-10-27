@@ -1,0 +1,135 @@
+{
+  "created": {
+    "job_id": "j_2e55aacd79f411f6920d9aa3",
+    "post_id": "p_ac4f942e97c9b32b91d4b775",
+    "status": "ACCEPTED"
+  },
+  "job": {
+    "attempts": 5,
+    "candidates": [
+      {
+        "avatar_id": "fitness",
+        "name": "运动搭子",
+        "score": 0.06557377049180328,
+        "evidence": [
+          "semantic rank=1 rrf=0.01639 cosine=0.418",
+          "keyword rank=1 rrf=0.03279 matches=跑步,马拉松",
+          "public_history rank=1 rrf=0.01639"
+        ],
+        "actions": [
+          "LIKE",
+          "COMMENT"
+        ],
+        "status": "COMPLETED",
+        "reason": "SHARED_INTEREST",
+        "comment": "关于跑步的分享很有意思！你最想交流的是哪一部分？",
+        "action_states": {
+          "COMMENT": "SUCCEEDED",
+          "LIKE": "SUCCEEDED"
+        }
+      }
+    ],
+    "created_at": 1793123702627,
+    "deadline": 1793123822627,
+    "epoch": 5,
+    "error": "",
+    "events": [
+      {
+        "id": "e_a2ffc81f1fe4f8e7e94d7336",
+        "interaction_id": "i_6ae0a6e5e576cf98c7266461",
+        "status": "DELIVERED"
+      },
+      {
+        "id": "e_db90e75cf165345eb3664c73",
+        "interaction_id": "i_7c3d21db8e8449768889e994",
+        "status": "DELIVERED"
+      }
+    ],
+    "fault": "",
+    "id": "j_2e55aacd79f411f6920d9aa3",
+    "max_candidates": 4,
+    "next_run": 0,
+    "operations": [
+      {
+        "attempt": 1,
+        "avatar_id": "",
+        "cost": 1,
+        "error": "",
+        "name": "understand",
+        "operation_key": "j_2e55aacd79f411f6920d9aa3:understand::1",
+        "status": "SUCCEEDED"
+      },
+      {
+        "attempt": 1,
+        "avatar_id": "fitness",
+        "cost": 1,
+        "error": "",
+        "name": "decision",
+        "operation_key": "j_2e55aacd79f411f6920d9aa3:decision:fitness:1",
+        "status": "SUCCEEDED"
+      },
+      {
+        "attempt": 1,
+        "avatar_id": "fitness",
+        "cost": 1,
+        "error": "",
+        "name": "comment",
+        "operation_key": "j_2e55aacd79f411f6920d9aa3:comment:fitness:1",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "post_id": "p_ac4f942e97c9b32b91d4b775",
+    "stage": "DONE",
+    "stages": [
+      {
+        "name": "MODERATE",
+        "output": {
+          "engine": "deterministic_mock",
+          "scope": "text and supplied captions only; not real media moderation",
+          "verdict": "PASS"
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "UNDERSTAND",
+        "output": {
+          "embedding": "hash-bigram-64-v1",
+          "model": "mock-v1",
+          "summary": "第一次参加半程马拉松跑步，最后五公里很吃力，想请教如何科学安排配速和恢复。",
+          "topics": [
+            "跑步",
+            "马拉松"
+          ]
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "MATCH",
+        "output": {
+          "candidate_count": 1,
+          "frozen": true,
+          "strategy": "topic-qualified weighted RRF hash similarity/keyword/public_history"
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "DECIDE",
+        "output": {
+          "plan": "LIKE and COMMENT frozen independently",
+          "private_context": "used only inside decision; never copied into public generation"
+        },
+        "status": "SUCCEEDED"
+      },
+      {
+        "name": "PUBLISH",
+        "output": {
+          "actions": "independently idempotent",
+          "publisher": "local SQL transaction"
+        },
+        "status": "SUCCEEDED"
+      }
+    ],
+    "status": "COMPLETED",
+    "updated_at": 1793123703012
+  }
+}
