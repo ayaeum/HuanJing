@@ -1,0 +1,25 @@
+{
+  "notice": "所有媒体为本地生成的技术测试素材。图片和视频是测试图，音频是正弦波；系统展示的跑步/OCR/ASR语义证据由Mock提供，不代表真实识别。",
+  "files": [
+    {
+      "path": "running.png",
+      "mime": "image/png",
+      "actual_content": "640x360测试图"
+    },
+    {
+      "path": "training.wav",
+      "mime": "audio/wav",
+      "actual_content": "2秒440Hz正弦波，无人声"
+    },
+    {
+      "path": "outdoor.mp4",
+      "mime": "video/mp4",
+      "actual_content": "3秒动态测试图+660Hz音调，无真实户外场景"
+    },
+    {
+      "path": "text.txt",
+      "mime": "text/plain",
+      "actual_content": "半马训练提问"
+    }
+  ]
+}

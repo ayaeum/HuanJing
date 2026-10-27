@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>幻境 HuanJing · 分身互动实验室</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><div class="brand">◈ 幻境 <span>HuanJing · 分身互动实验室</span></div><div class="mode">LOCAL MOCK · 持久任务演示</div><span id="connection">连接中</span></header>
+<div class="notice"><strong>演示边界</strong> 模型、审核与向量语义均为确定性 Mock；附件会实际上传，但语义证据由填写的模拟描述提供。当前运行使用 SQLite 持久任务；生产方案采用 Temporal / PostgreSQL / Qdrant。</div>
+<main>
+<section class="rail"><div class="panel"><div class="eyebrow">01 / 发起一次互动</div><h1>发布想法，遇见分身</h1><p class="muted">先审核与理解，再召回候选，由分身决定互动。</p>
+<form id="compose"><label for="post-text">帖子内容</label><textarea id="post-text" rows="5" required>第一次参加半程马拉松跑步，最后五公里很吃力，想请教如何科学安排配速和恢复。</textarea>
+<label for="files">附件 · 图片 / 音频 / 视频</label><input id="files" type="file" accept="image/*,audio/*,video/*" multiple><div id="file-preview"></div>
+<label for="caption">模拟媒体描述 <span class="muted">（不是实际识别结果）</span></label><input id="caption" placeholder="例如：运动截图展示半马配速；此描述作为 Mock 证据">
+<div class="form-row"><div><label for="candidate-count">候选上限</label><input id="candidate-count" type="number" min="1" max="5" value="4"></div><div><label for="fault">故障场景</label><select id="fault"><option value="">正常链路</option><option value="retry_once">依赖失败一次后恢复</option><option value="always_fail">持续依赖失败</option><option value="unknown_once">外部结果未知 · 对账</option><option value="comment_reject">评论审核拒绝</option><option value="slow">慢调用 / 重启恢复</option></select></div></div>
+<button class="primary" id="publish" type="submit">发布并观察链路 →</button><button id="retry-submit" type="button" hidden>重试确认上次提交（相同幂等键）</button><div id="form-message" role="status"></div></form>
+<details><summary>一键示例</summary><div class="examples"><button data-example="fitness">半马训练</button><button data-example="travel">户外旅行</button><button data-example="cooking">周末烘焙</button><button data-example="technology">系统设计</button><button data-example="art">摄影艺术</button></div><p class="small">以下用固定测试短语演示 Mock 动作策略，不代表真实模型能力。</p><div class="examples"><button data-example="commentOnly">仅评论</button><button data-example="likeOnly">仅点赞</button><button data-example="ignore">忽略</button></div></details></div>
+<div class="panel"><h2>分身画像 <span class="small">公开信息</span></h2><div id="avatars"></div></div></section>
+<section class="center"><div id="stats" class="stats"></div><div class="section-heading"><h2>帖子与互动</h2><button id="refresh">刷新</button></div><div id="feed" class="feed"><div class="empty">正在读取帖子…</div></div></section>
+<aside class="panel inspect"><div class="eyebrow">02 / 追踪可恢复链路</div><h2>处理详情</h2><div id="inspector"><div class="empty">发布或点击一条帖子，查看阶段、召回证据和逐动作结果。</div></div></aside>
+</main><footer>模型生成可以重复尝试；业务动作通过持久账本去重。此页面不展示私有记忆或模型私密推理。</footer>
+<script src="/app.js"></script></body></html>
