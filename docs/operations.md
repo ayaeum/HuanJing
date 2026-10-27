@@ -2,6 +2,8 @@
 
 ## 配置和数据
 
+默认需要 `AI_BASE_URL`、`AI_API_KEY`、`AI_MODEL` 三个环境变量，详见 [真实语义接入](real-semantics.md)。离线回归显式使用 `AI_MODE=test_fixture`。
+
 服务默认绑定 `127.0.0.1:8080`，SQLite 默认位于 `data/system.db`，默认 4 个 worker。`ADDR`、`DB_PATH`、`WORKERS` 控制对应项。保持数据库路径稳定才能跨进程恢复任务；换一个路径相当于新实例。
 
 `SEED_TENANTS=demo,loadtest` 可为额外演示租户建立分身和预算；`WEB_DIR` 控制静态页面目录。使用新数据库执行独立测试，避免停用分身或撤回记忆影响后续基线。
@@ -15,6 +17,7 @@
 | 查看运行状态 | `GET /api/stats`、`GET /metrics` | 队列、状态分布、预算 |
 | 查看任务证据 | `GET /api/jobs/{id}` | 阶段、候选、操作和事件 |
 | 重试失败任务 | `POST /api/jobs/{id}/retry` | 新 epoch；保留已完成阶段；删除帖子不复活 |
+| 真实 AI 未知请求处置 | `POST /api/jobs/{id}/resolve-ai` | 显式放弃并消耗请求额度；随后由用户决定是否新收费重试 |
 | 模拟未知结果对账 | `POST /api/jobs/{id}/reconcile` | 查询持久模拟回执，恢复原请求 |
 | 停用分身 | `PATCH /api/avatars/{id}`，`{"active":false}` | 授权 epoch 更新，拒绝后续提交 |
 | 删除帖子 | `DELETE /api/posts/{id}` | 帖子和互动不可见，停止任务 |
@@ -47,6 +50,6 @@
 
 [Prometheus 配置](../monitoring/prometheus.yml) 和 [告警规则](../monitoring/alerts.yml) 使用当前 `/metrics` 指标。将它们挂载到已有 Prometheus 的 `/etc/prometheus/`，并让 Prometheus 与应用在同一 Docker 网络；本机进程部署时将 target 改为实际可达地址。仓库默认 Compose 只启动应用，不自动启动监控平台。
 
-规则覆盖抓取失败、最老待处理任务、UNKNOWN 未决和 outbox 积压。60 秒、2 分钟、100 条是本地演示阈值，应按冻结的 SLO 和真实负载调整。所有状态计数都是 gauge，不能对其直接使用 counter 的 rate 语义。预算单位是模拟调用单位，无法据此直接计算真实货币费用。
+规则覆盖抓取失败、最老待处理任务、UNKNOWN 未决和 outbox 积压。60 秒、2 分钟、100 条是本地演示阈值，应按冻结的 SLO 和真实负载调整。所有状态计数都是 gauge，不能对其直接使用 counter 的 rate 语义。预算单位是请求额度；真实 token 在 AI 操作账本记录，货币费用仍需供应商账单。
 
 容器验证或端口冲突时可用 `PORT=8083 docker compose up --build`。默认仍绑定本机回环地址，数据放在命名卷内。
