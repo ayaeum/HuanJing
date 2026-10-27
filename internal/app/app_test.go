@@ -17,6 +17,7 @@ func newTest(t *testing.T) *App {
 	if e != nil {
 		t.Fatal(e)
 	}
+	a.AIMode = "TEST_FIXTURE"
 	t.Cleanup(func() { a.DB.Close() })
 	return a
 }
@@ -302,13 +303,13 @@ func TestCandidateSnapshotSurvivesStageCrash(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if e = a.match(j); e != nil {
+	if e = a.matchFixture(j); e != nil {
 		t.Fatal(e)
 	}
 	before, _ := a.candidates(id)
 	a.DB.Exec(`UPDATE avatars SET active=0 WHERE tenant='demo'`)
 	a.DB.Exec(`INSERT INTO avatars VALUES('new','demo','new','旅行','旅行',1,1)`)
-	if e = a.match(j); e != nil {
+	if e = a.matchFixture(j); e != nil {
 		t.Fatal(e)
 	}
 	after, _ := a.candidates(id)

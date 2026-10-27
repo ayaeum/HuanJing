@@ -29,6 +29,9 @@ func main() {
 		log.Fatal(e)
 	}
 	defer a.DB.Close()
+	if e = a.ConfigureAIFromEnv(); e != nil {
+		log.Fatal(e)
+	}
 	for _, t := range strings.Split(env("SEED_TENANTS", "demo"), ",") {
 		if t = strings.TrimSpace(t); t != "" {
 			if e := a.Seed(t); e != nil {
@@ -47,7 +50,7 @@ func main() {
 		defer cancel()
 		s.Shutdown(shutdown)
 	}()
-	log.Printf("LOCAL_MOCK listening on %s; deterministic captions, no real AI moderation", s.Addr)
+	log.Printf("%s listening on %s; moderation, media perception, decisions and comment generation remain simulated", a.AIMode, s.Addr)
 	if e = s.ListenAndServe(); e != nil && e != http.ErrServerClosed {
 		log.Fatal(e)
 	}

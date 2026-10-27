@@ -56,7 +56,7 @@ func (a *App) Handler() http.Handler {
 			bad(w, 503, "database unavailable")
 			return
 		}
-		respond(w, 200, map[string]string{"status": "ok", "mode": "LOCAL_MOCK"})
+		respond(w, 200, map[string]string{"status": "ok", "mode": a.AIMode, "semantics": map[bool]string{true: "real_model", false: "test_fixture"}[a.AI != nil], "remaining_simulations": "moderation, raw media perception, action decisions, comment generation", "budget_unit": "request allowance; not currency"})
 	})
 	m.HandleFunc("GET /api/avatars", a.avatars)
 	m.HandleFunc("PATCH /api/avatars/{id}", a.avatarPatch)
@@ -73,6 +73,7 @@ func (a *App) Handler() http.Handler {
 	m.HandleFunc("GET /api/jobs/{id}", a.job)
 	m.HandleFunc("POST /api/jobs/{id}/retry", a.retry)
 	m.HandleFunc("POST /api/jobs/{id}/reconcile", a.reconcile)
+	m.HandleFunc("POST /api/jobs/{id}/resolve-ai", a.resolveAI)
 	m.HandleFunc("GET /api/stats", a.stats)
 	m.HandleFunc("POST /api/budget", a.budget)
 	m.HandleFunc("GET /metrics", a.metrics)
@@ -450,16 +451,21 @@ func (a *App) job(w http.ResponseWriter, r *http.Request) {
 		bad(w, 404, "job not found")
 		return
 	}
+	aiOperations, err := a.aiOperations(j.ID)
+	if err != nil {
+		bad(w, 500, "AI ledger unavailable")
+		return
+	}
 	var deleted int
 	a.DB.QueryRow(`SELECT deleted FROM posts WHERE id=?`, j.PostID).Scan(&deleted)
 	if deleted != 0 {
-		respond(w, 200, map[string]any{"id": j.ID, "post_id": j.PostID, "status": j.Status, "stage": j.Stage, "error": "post deleted", "stages": []any{}, "candidates": []any{}, "operations": []any{}, "events": []any{}})
+		respond(w, 200, map[string]any{"id": j.ID, "post_id": j.PostID, "status": j.Status, "stage": j.Stage, "error": "post deleted", "stages": []any{}, "candidates": []any{}, "operations": []any{}, "events": []any{}, "ai_operations": aiOperations})
 		return
 	}
 	raw, _ := json.Marshal(j)
 	out := map[string]any{}
 	json.Unmarshal(raw, &out)
-	for _, k := range []string{"stages", "candidates", "operations", "events"} {
+	for _, k := range []string{"stages", "candidates", "operations", "events", "ai_operations"} {
 		out[k] = []any{}
 	}
 	rs, _ := a.DB.Query(`SELECT name,data FROM stages WHERE job_id=? ORDER BY created`, j.ID)
@@ -485,6 +491,7 @@ func (a *App) job(w http.ResponseWriter, r *http.Request) {
 		}
 		rs.Close()
 	}
+	out["ai_operations"] = aiOperations
 	rs, _ = a.DB.Query(`SELECT id,status,interaction_id FROM outbox WHERE post_id=? AND tenant=?`, j.PostID, j.Tenant)
 	if rs != nil {
 		for rs.Next() {
@@ -566,7 +573,7 @@ func (a *App) reconcile(w http.ResponseWriter, r *http.Request) {
 	respond(w, 202, map[string]string{"status": "ACCEPTED"})
 }
 func (a *App) stats(w http.ResponseWriter, r *http.Request) {
-	out := map[string]any{"mode": "LOCAL_MOCK", "active_workers": a.Active.Load()}
+	out := map[string]any{"mode": a.AIMode, "active_workers": a.Active.Load(), "budget_unit": "request allowance; not currency"}
 	for _, table := range []string{"posts", "jobs", "interactions"} {
 		var n int
 		if e := a.DB.QueryRow("SELECT COUNT(*) FROM "+table+" WHERE tenant=?", tenant(r)).Scan(&n); e != nil {

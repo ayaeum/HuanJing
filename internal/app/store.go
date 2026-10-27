@@ -15,6 +15,8 @@ import (
 )
 
 type App struct {
+	AI        *AIConfig
+	AIMode    string
 	DB        *sql.DB
 	Workers   int
 	UploadDir string
@@ -62,6 +64,7 @@ func Open(path string, workers int) (*App, error) {
  CREATE TABLE IF NOT EXISTS action_states(job_id TEXT,avatar_id TEXT,kind TEXT,status TEXT,error TEXT DEFAULT '',interaction_id TEXT DEFAULT '',PRIMARY KEY(job_id,avatar_id,kind));
  CREATE TABLE IF NOT EXISTS interactions(id TEXT PRIMARY KEY,tenant TEXT,post_id TEXT,avatar_id TEXT,kind TEXT,content TEXT,created INTEGER,UNIQUE(tenant,post_id,avatar_id,kind));
  CREATE TABLE IF NOT EXISTS outbox(id TEXT PRIMARY KEY,tenant TEXT,post_id TEXT,interaction_id TEXT,avatar_id TEXT,content TEXT,status TEXT DEFAULT 'PENDING',created INTEGER);
+ CREATE TABLE IF NOT EXISTS ai_operations(operation_key TEXT PRIMARY KEY,tenant TEXT NOT NULL,job_id TEXT NOT NULL,name TEXT NOT NULL,attempt INTEGER NOT NULL,status TEXT NOT NULL,request_json TEXT NOT NULL,request_hash TEXT NOT NULL,model TEXT NOT NULL,result TEXT DEFAULT '',response_id TEXT DEFAULT '',input_tokens INTEGER DEFAULT 0,output_tokens INTEGER DEFAULT 0,usage_reported INTEGER DEFAULT 0,error TEXT DEFAULT '',created INTEGER NOT NULL,updated INTEGER NOT NULL,UNIQUE(job_id,name,attempt));
  CREATE TABLE IF NOT EXISTS uploads(id TEXT PRIMARY KEY,tenant TEXT,name TEXT,mime TEXT,size INTEGER,caption TEXT,path TEXT,created INTEGER);
  CREATE TABLE IF NOT EXISTS upload_bindings(tenant TEXT,upload_id TEXT,post_id TEXT,PRIMARY KEY(tenant,upload_id,post_id));
  INSERT OR IGNORE INTO upload_bindings SELECT p.tenant,a.value,p.id FROM posts p,json_each(p.attachments) a;
