@@ -15,3 +15,4 @@ jobs:
       - run: go test -race ./...
       - run: make build
       - run: python3 scripts/acceptance.py
+      - run: make test-e2e

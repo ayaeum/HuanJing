@@ -1,0 +1,41 @@
+{
+  "verified_at": "2026-10-27T17:56:20.476958+00:00",
+  "backend_commit": "11bc3bf651914aa2147b0dd60b9832a7207e3576",
+  "source_sha256": {
+    "internal/app/app_test.go": "909cb91f5113797c997f01e74038b0d7b24eccec957d2f6843818d684fe91958",
+    "internal/app/http.go": "90bb2e6ba95805f890148bd5eb6598570418d9c70a9e29bf7e4ebf9fdc3fba2f",
+    "internal/app/lifecycle.go": "bbf85dcf3f62dca16e1b848a66ac361ff02f3dbd419af69ff41ed67755ccb60b",
+    "internal/app/store.go": "c85b6d423d5a60f21ee75b584732abd2dc5855111b5785915296eee908ce8d31",
+    "internal/app/worker.go": "988e9192f822e1c4a063f7b8f879bc62dbaae448471042dba6e3f75fef269a40"
+  },
+  "trimpath_binary_sha256": "90bbd65fe026a837e1dea67f15db1c39091184b25a8811d7226ec7d803319aa0",
+  "http_suite_binary_sha256": "b63168639592e2ed0a4f36d174b338ae2972f7a2d9b1f3bcd4a4f5b49dd37fa5",
+  "checks": [
+    "go test -race ./...",
+    "go vet ./...",
+    "HTTP contract and lifecycle E2E",
+    "real browser E2E (see separate report)",
+    "100/c8 + 200/c32 lifecycle load",
+    "same-text marathon regression on persistent demo DB"
+  ],
+  "note": "HTTP suites use go build without trimpath; load and 8080 demo use trimpath. Original verification-manifest.json is historical evidence for earlier commit.",
+  "suite_results": {
+    "e2e-contract": {
+      "passed": 47,
+      "failed": 0
+    },
+    "e2e-lifecycle": {
+      "passed": 28,
+      "failed": 0
+    },
+    "e2e-browser": {
+      "passed": 22,
+      "failed": 0
+    }
+  },
+  "frontend_sha256": {
+    "web/index.html": "ae16c4f96c8c12ad9af745a6f968f00303af9dda66a3881606590d8ba7ac3fdc",
+    "web/style.css": "0ba9ef556aaaff7ccbc0f4901046a329f2d73c654ceb9a1658bfc1f8a895e408",
+    "web/app.js": "fda5092e12b39fda04b8e2c2c2071abe095718265542e7b083beed243e8aa7b4"
+  }
+}
