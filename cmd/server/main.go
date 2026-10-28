@@ -50,7 +50,7 @@ func main() {
 		defer cancel()
 		s.Shutdown(shutdown)
 	}()
-	log.Printf("%s listening on %s; moderation, media perception, decisions and comment generation remain simulated", a.AIMode, s.Addr)
+	log.Printf("%s listening on %s; moderation, raw media perception and action decisions remain simulated; see /api/health for mode", a.AIMode, s.Addr)
 	if e = s.ListenAndServe(); e != nil && e != http.ErrServerClosed {
 		log.Fatal(e)
 	}

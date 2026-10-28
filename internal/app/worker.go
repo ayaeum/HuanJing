@@ -503,15 +503,19 @@ func (a *App) publish(ctx context.Context, j Job) error {
 					partial = true
 					continue
 				}
-				var interest string
-				a.DB.QueryRow(`SELECT interests FROM avatars WHERE tenant=? AND id=?`, j.Tenant, c.AvatarID).Scan(&interest)
-				words := strings.Fields(interest)
-				topic := "这个话题"
-				if len(words) > 0 {
-					topic = words[0]
+				if a.AI != nil {
+					comment, e = a.commentReal(ctx, j, c)
+				} else {
+					var interest string
+					a.DB.QueryRow(`SELECT interests FROM avatars WHERE tenant=? AND id=?`, j.Tenant, c.AvatarID).Scan(&interest)
+					words := strings.Fields(interest)
+					topic := "这个话题"
+					if len(words) > 0 {
+						topic = words[0]
+					}
+					comment = fmt.Sprintf("关于%s的分享很有意思！你最想交流的是哪一部分？", topic)
+					comment, e = a.call(ctx, j, "comment", c.AvatarID, comment)
 				}
-				comment = fmt.Sprintf("关于%s的分享很有意思！你最想交流的是哪一部分？", topic)
-				comment, e = a.call(ctx, j, "comment", c.AvatarID, comment)
 				if e != nil {
 					var fe *flowError
 					if errors.As(e, &fe) && fe.Status == "NEEDS_RECONCILIATION" {

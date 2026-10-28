@@ -21,14 +21,14 @@ function renderHealth(health){
   const fixture=health.semantics==='test_fixture'||['TEST_FIXTURE','LOCAL_MOCK'].includes(health.mode);
   const fault=$('fault');
   for(const option of fault.options){
-    if(['retry_once','always_fail'].includes(option.value)){
+    if(['retry_once','always_fail','unknown_once'].includes(option.value)){
       option.disabled=!fixture;
-      option.textContent=(option.value==='retry_once'?'模拟理解失败一次':'模拟理解持续失败')+(fixture?'':' · 仅离线测试');
+      option.textContent=(option.value==='retry_once'?'模拟理解失败一次':option.value==='unknown_once'?'模拟评论调用未知':'模拟理解持续失败')+(fixture?'':' · 仅离线测试');
     }
   }
   if(fault.selectedOptions[0]?.disabled)fault.value='';
-  $('mode-label').textContent=real?'REAL SEMANTICS · 真实文本理解与匹配':fixture?'TEST FIXTURE · 确定性测试模式':'运行模式未确认';
-  const text=real?`文本理解与公开画像语义匹配调用真实模型；${remaining}仍为模拟。匹配使用模型相关性评分，不是已实现的向量数据库检索。`:fixture?'文本理解与语义匹配当前为确定性测试实现（Mock），不调用真实语义模型；审核、原始媒体感知、动作决策和评论生成也为模拟。':'暂未确认服务能力，不据此推断模型是否真实调用。';
+  $('mode-label').textContent=real?'REAL SEMANTICS · 真实理解、匹配与评论':fixture?'TEST FIXTURE · 确定性测试模式':'运行模式未确认';
+  const text=real?`文本理解、公开画像语义匹配与评论生成调用真实模型；${remaining}仍为模拟。匹配使用模型相关性评分，不是已实现的向量数据库检索。`:fixture?'文本理解与语义匹配当前为确定性测试实现（Mock），不调用真实语义模型；审核、原始媒体感知、动作决策和评论生成也为模拟。':'暂未确认服务能力，不据此推断模型是否真实调用。';
   $('mode-notice').innerHTML=`<strong>能力边界</strong> ${esc(text)} 附件描述由手动填写，不能视为真实 OCR / ASR / 视频分析。历史帖子按自身阶段记录标注来源。调用额度不是实际金额。`;
 }
 function outputOf(stage){if(!stage)return null;if(typeof stage.output==='string'){try{return JSON.parse(stage.output);}catch(_){return null;}}return stage.output||null;}
@@ -94,8 +94,8 @@ function renderJob(j){
     ${unresolvedAI.length?'<p class="small">真实模型请求的远端结果和费用尚未确认。下面的“放弃”操作只处置本地账本，不查询远端回执，也不退款。</p>':''}
     <div class="tools">${tools.join('')}</div>
     <h3>候选与逐动作结果</h3>
-    <div class="small">动作决策与评论生成仍为模拟。${matching.kind==='real'?'模型评分用于排序，不代表互动概率。':''}${matching.kind==='real'&&matchOutput?.threshold!==undefined?` 本帖阈值：${esc(matchOutput.threshold)}。`:''}</div>
-    ${(j.candidates||[]).length?(j.candidates||[]).map(c=>`<div class="candidate"><div class="candidate-head"><strong>${esc(c.name||c.avatar_id)}</strong>${badge(c.status)}</div><div class="evidence">${esc(scoreLabel)} ${esc(Number(c.score||0).toFixed(3))}<br>${esc(pretty(c.evidence))}</div><div>${renderActions(c.actions,c.action_states)}</div>${c.reason?`<div class="small">模拟决策原因：${esc(c.reason)}</div>`:''}${c.comment?`<div class="comment"><span class="small">模拟生成评论</span><br>${esc(c.comment)}</div>`:''}</div>`).join(''):'<div class="empty">尚无候选结果；请结合上方阶段状态判断等待、失败或正常零候选。</div>'}
+    <div class="small">动作决策仍为模拟；真实模式的评论由模型结合帖子和公开人设生成。${matching.kind==='real'?'模型评分用于排序，不代表互动概率。':''}${matching.kind==='real'&&matchOutput?.threshold!==undefined?` 本帖阈值：${esc(matchOutput.threshold)}。`:''}</div>
+    ${(j.candidates||[]).length?(j.candidates||[]).map(c=>`<div class="candidate"><div class="candidate-head"><strong>${esc(c.name||c.avatar_id)}</strong>${badge(c.status)}</div><div class="evidence">${esc(scoreLabel)} ${esc(Number(c.score||0).toFixed(3))}<br>${esc(pretty(c.evidence))}</div><div>${renderActions(c.actions,c.action_states)}</div>${c.reason?`<div class="small">模拟决策原因：${esc(c.reason)}</div>`:''}${c.comment?`<div class="comment"><span class="small">评论内容</span><br>${esc(c.comment)}</div>`:''}</div>`).join(''):'<div class="empty">尚无候选结果；请结合上方阶段状态判断等待、失败或正常零候选。</div>'}
     <details data-section="stages"><summary>阶段证据 · 按阶段标注来源</summary>${stages.map(stage=>`<h3>${esc(stageNames[stage.name]||stage.name)} · ${esc(stageSourceLabel(stages,stage.name))}</h3><pre>${esc(pretty(stage.output))}</pre>`).join('')}</details>
     <details data-section="ai-ledger"><summary>真实模型调用 / Token 账本（${aiOperations.length}）</summary>${aiLedger(aiOperations)}</details>
     <details data-section="mock-ledger"><summary>模拟调用账本（${(j.operations||[]).length}）</summary><div class="small">模拟请求额度，不代表供应商 Token 或实际金额。</div><pre>${esc(operationalText(pretty(j.operations||[])))}</pre></details>

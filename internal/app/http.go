@@ -56,7 +56,7 @@ func (a *App) Handler() http.Handler {
 			bad(w, 503, "database unavailable")
 			return
 		}
-		respond(w, 200, map[string]string{"status": "ok", "mode": a.AIMode, "semantics": map[bool]string{true: "real_model", false: "test_fixture"}[a.AI != nil], "remaining_simulations": "moderation, raw media perception, action decisions, comment generation", "budget_unit": "request allowance; not currency"})
+		respond(w, 200, map[string]string{"status": "ok", "mode": a.AIMode, "semantics": map[bool]string{true: "real_model", false: "test_fixture"}[a.AI != nil], "remaining_simulations": map[bool]string{true: "moderation, raw media perception, action decisions", false: "moderation, raw media perception, action decisions, comment generation"}[a.AI != nil], "budget_unit": "request allowance; not currency"})
 	})
 	m.HandleFunc("GET /api/avatars", a.avatars)
 	m.HandleFunc("PATCH /api/avatars/{id}", a.avatarPatch)
