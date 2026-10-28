@@ -1,0 +1,46 @@
+{
+  "post_id": "p_8b792f64a0a82fa6bed2104f",
+  "job_id": "j_fa8325df32ddd84f1010cc09",
+  "status": "COMPLETED",
+  "comments": [
+    "建议选带筋带脂的牛腩（肋条肉），或者牛肩肉，别用太瘦的牛腱。切成大块后先煎香，番茄和水加足，小火保持微沸炖约2.5～3小时；一直大火翻滚容易把肉煮柴。想要软烂但不散，筷子能插入、还有一点阻力时就可以关火焖一会儿。"
+  ],
+  "ai_operations": [
+    {
+      "attempt": 1,
+      "error": "",
+      "input_tokens": 211,
+      "model": "gpt-5.6-luna",
+      "name": "understand-v1",
+      "operation_key": "j_fa8325df32ddd84f1010cc09:understand-v1:1",
+      "output_tokens": 177,
+      "response_id": "resp_05b1e37c3550226d016ae170e00f40819e8c9e6bd9eac4ae62",
+      "status": "SUCCEEDED",
+      "usage_reported": true
+    },
+    {
+      "attempt": 1,
+      "error": "",
+      "input_tokens": 703,
+      "model": "gpt-5.6-luna",
+      "name": "match-v1",
+      "operation_key": "j_fa8325df32ddd84f1010cc09:match-v1:1",
+      "output_tokens": 373,
+      "response_id": "resp_061d0a2538071dda016ae170e3c29c819d93037bf8312078f4",
+      "status": "SUCCEEDED",
+      "usage_reported": true
+    },
+    {
+      "attempt": 1,
+      "error": "",
+      "input_tokens": 290,
+      "model": "gpt-5.6-luna",
+      "name": "comment-v1:food",
+      "operation_key": "j_fa8325df32ddd84f1010cc09:comment-v1:food:1",
+      "output_tokens": 215,
+      "response_id": "resp_0c87e294ee96c875016ae170e7e41c819f853ec73ee0439c50",
+      "status": "SUCCEEDED",
+      "usage_reported": true
+    }
+  ]
+}

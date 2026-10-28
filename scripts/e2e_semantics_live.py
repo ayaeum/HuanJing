@@ -72,8 +72,11 @@ def main():
                 assert stages["MATCH"]["engine"] == "real_model"
                 assert stages["UNDERSTAND"]["analysis"]["summary"] != text, "Summary was copied unchanged"
                 operations = row["ai_operations"]
-                assert len(operations) == 2 and all(o["status"] == "SUCCEEDED" for o in operations)
+                assert len(operations) == 2 + len(expected) and all(o["status"] == "SUCCEEDED" for o in operations)
                 assert all(o["usage_reported"] and o["input_tokens"] > 0 and o["output_tokens"] > 0 for o in operations)
+                for c in job['candidates']:
+                    assert c.get('comment', '').strip(), "Model comment is empty"
+                    assert "你最想交流的是哪一部分" not in c['comment'], "Old comment template remains"
                 assert "PRIVATE_CANARY" not in json.dumps(job)
                 row["status"] = "PASS"
             except Exception as exc:

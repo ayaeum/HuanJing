@@ -49,7 +49,7 @@ class ProviderFixture:
                     return
                 request = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
                 inp = json.loads(request['messages'][-1]['content'])
-                stage = 'match' if 'profiles' in inp else 'understand'
+                stage = 'comment' if 'public_profile' in inp else ('match' if 'profiles' in inp else 'understand')
                 with owner.lock:
                     ordinal = sum(r['stage'] == stage for r in owner.records) + 1
                     owner.records.append({'stage': stage, 'ordinal': ordinal, 'input': inp,
@@ -62,7 +62,7 @@ class ProviderFixture:
                 if stage == 'understand' and mode == '401':
                     self.reply(401, {'error': {'message': 'fixture unauthorized'}})
                     return
-                if stage == 'understand' and mode == 'drop_once' and ordinal == 1:
+                if (stage == 'understand' and mode == 'drop_once' or stage == 'comment' and mode == 'drop_comment') and ordinal == 1:
                     self.close_connection = True
                     with contextlib.suppress(OSError):
                         self.connection.shutdown(socket.SHUT_RDWR)
@@ -82,6 +82,9 @@ class ProviderFixture:
                         content.pop('intent')
                     elif mode == 'credential_echo':
                         content['summary'] = DUMMY_KEY
+                elif stage == 'comment':
+                    content = {'comment': '后半程掉速可以先检查前半程是否过快，训练时练习均匀配速。'}
+                    if mode == 'invalid_comment': content = {'comment': ''}
                 else:
                     scores = []
                     for p in inp['profiles']:
@@ -183,11 +186,11 @@ def case_success(s, upstream):
     check(upstream.count('understand') == upstream.count('match') == 1, upstream.records)
     check({c['avatar_id'] for c in job['candidates']} == {'fitness'}, job)
     ops = operations(job)
-    check(len(ops) == 2 and all(o['status'] == 'SUCCEEDED' for o in ops), ops)
+    check(len(ops) == 3 and all(o['status'] == 'SUCCEEDED' for o in ops), ops)
     check(all(o['input_tokens'] == 31 and o['output_tokens'] == 17 and o['usage_reported'] for o in ops), ops)
     check(all(r['authorization_valid'] for r in upstream.records), 'local dummy authorization absent')
     check(s.expect('GET', '/api/health')['mode'] == 'REAL_SEMANTICS', 'wrong configured mode')
-    return {'requests': 2, 'candidates': ['fitness'], 'input_tokens': 62, 'output_tokens': 34,
+    return {'requests': 3, 'candidates': ['fitness'], 'input_tokens': 93, 'output_tokens': 51,
             'evidence_scope': 'protocol fixture selected a non-keyword candidate; not semantic-quality evidence'}
 
 
@@ -395,7 +398,7 @@ def case_empty_candidates(s, upstream):
 
 def case_usage_optional(s, upstream):
     job = settled(s, create(s))
-    check(len(operations(job)) == 2 and all(not o['usage_reported'] for o in operations(job)), job)
+    check(len(operations(job)) == 3 and all(not o['usage_reported'] for o in operations(job)), job)
     return {'usage_reported': False, 'status': job['status']}
 
 
@@ -409,7 +412,7 @@ def case_missing_configuration(binary):
 
 
 CASES = [
-    ('two_real_adapter_stages_and_usage', 'success', case_success, 'two HTTP calls, usage retained, fixture non-keyword candidate'),
+    ('three_real_adapter_stages_and_usage', 'success', case_success, 'two HTTP calls, usage retained, fixture non-keyword candidate'),
     *[(f'invalid_{mode}', mode, case_invalid, 'FAILED/INVALID_RESPONSE; no automatic or explicit-retry resend; no fallback')
       for mode in ['malformed_understand', 'missing_understand', 'missing_profile', 'duplicate_profile', 'unknown_profile',
                    'out_of_range', 'null_score', 'missing_relevant', 'forged_evidence', 'extra_field', 'truncated', 'credential_echo']],
@@ -433,6 +436,25 @@ CASES = [
     ('missing_usage_is_explicitly_unknown', 'missing_usage', case_usage_optional, 'success with usage_reported=false'),
 ]
 
+
+
+def case_comment_failure(s, upstream):
+    obj = create(s)
+    unknown = upstream.behavior == 'drop_comment'
+    job = settled(s, obj, 'NEEDS_RECONCILIATION' if unknown else 'FAILED')
+    interactions = s.expect('GET', '/api/posts/' + obj['post_id'])['interactions']
+    check(len(interactions) == 1 and interactions[0]['kind'] == 'LIKE', interactions)
+    s.restart()
+    if not unknown:
+        s.expect('POST', '/api/jobs/' + obj['job_id'] + '/retry', status=202)
+        settled(s, obj, 'FAILED')
+    check(upstream.count('comment') == 1, upstream.records)
+    payload = next(r['input'] for r in upstream.records if r['stage'] == 'comment')
+    check(set(payload) == {'schema_version','text','public_profile'}, payload)
+    check('PRIVATE_CANARY' not in json.dumps(payload), 'private source in comment input')
+    return {'comment_requests': 1, 'retained_likes': 1, 'published_comments': 0}
+
+CASES += [('comment_invalid_no_template_fallback','invalid_comment',case_comment_failure,'invalid output fails; like retained; retry does not regenerate'),('comment_lost_response_restart','drop_comment',case_comment_failure,'unknown preserved across restart without repeated call or comment')]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
